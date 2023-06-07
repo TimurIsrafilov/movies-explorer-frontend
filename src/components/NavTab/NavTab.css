@@ -1,0 +1,29 @@
+.navtab-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(39, 39, 39, 1)
+}
+
+.navtab-text {
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    color: rgba(255, 255, 255, 1);
+    margin: 25px 0 25px 40px;
+    padding: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 1);
+}
+
+.navtab-text:first-child {
+    margin: 25px 0 25px 0;
+}
+
+@media screen and (max-width: 468px) {
+    .navtab-text {
+        line-height: 12px;
+    }
+}
