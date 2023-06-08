@@ -130,7 +130,7 @@
 
 @media screen and (max-width: 1024px) {
     .promo__landing {
-        margin: 216px 0 232px 0;
+        margin: 216px 0 216px 0;
     }
 }
 
@@ -145,7 +145,7 @@
 
 @media screen and (max-width: 468px) {
     .promo__landing {
-        margin: 138px 0 160px 0;
+        margin: 138px 0 150px 0;
     }
 }
 

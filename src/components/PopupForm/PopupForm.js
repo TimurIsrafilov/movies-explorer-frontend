@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function PopupForm() {
   return (
-    <div className="popup_opened">
+    <section className="popup_opened">
       <div className="popup__container">
         <button
           type="button"
@@ -37,7 +37,7 @@ function PopupForm() {
           </button>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

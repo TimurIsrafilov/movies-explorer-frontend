@@ -4,7 +4,7 @@ import card_example from "../../images/card_example.svg";
 
 function MoviesCard() {
   return (
-    <div className="movies-card__element">
+    <section className="movies-card__element">
       <img src={card_example} alt="Карта" className="movies-card__photo" />
       <div className="movies-card__container">
         <div className="movies-card__title-container">
@@ -17,7 +17,7 @@ function MoviesCard() {
           aria-label="поставить нравиться"
         ></button>
       </div>
-    </div>
+    </section>
   );
 }
 

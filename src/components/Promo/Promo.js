@@ -6,7 +6,7 @@ import logo from "../../images/logo.svg";
 
 function Promo() {
   return (
-    <div className="promo">
+    <section className="promo">
       <div className="promo__menu-container">
         <img className="promo__logo" alt="Лого" src={logo} />
         <div className="promo__menu">
@@ -27,7 +27,7 @@ function Promo() {
           </h2>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

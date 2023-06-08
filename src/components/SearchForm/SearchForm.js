@@ -5,9 +5,9 @@ import search_icon from "../../images/search_icon.svg";
 
 function SearchForm() {
   return (
-    <div className="search-form">
+    <section className="search-form">
       <div className="search-form__container">
-        <div className="search-form__container-serch">
+        <form className="search-form__container-serch">
           <div className="search-form__container-input">
             <div className="search-form__logo-loop" alt="Лупа"></div>
             <input
@@ -19,12 +19,14 @@ function SearchForm() {
               className="search-form__input"
             />
           </div>
-          <img
-            className="search-form__search-icon"
-            alt="Поиск"
-            src={search_icon}
-          />
-        </div>
+          <button className="search-form__search-button">
+            <img
+              className="search-form__search-icon"
+              alt="Поиск"
+              src={search_icon}
+            />
+          </button>
+        </form>
         <div className="search-form__container-icon">
           <img
             className="search-form__tumbler"
@@ -34,7 +36,7 @@ function SearchForm() {
           <span className="search-form__logo-span">Короткометражки</span>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

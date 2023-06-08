@@ -5,8 +5,8 @@ import PopupForm from "../PopupForm/PopupForm.js";
 
 function MoviesCardList() {
   return (
-    <div className="movies-card-list">
-      <div className="movies-card-list__container">
+    <section className="movies-card-list">
+      <ul className="movies-card-list__container">
         <MoviesCard />
         <MoviesCard />
         <MoviesCard />
@@ -23,12 +23,12 @@ function MoviesCardList() {
         <MoviesCard />
         <MoviesCard />
         <MoviesCard />
-      </div>
+      </ul>
       <div className="movies-card-list__add-container">
         <button className="movies-card-list__add">Ещё</button>
       </div>
-      <PopupForm />
-    </div>
+      {/* <PopupForm /> */}
+    </section>
   );
 }
 

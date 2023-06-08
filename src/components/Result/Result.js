@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function Result() {
   return (
-    <div className="result">
+    <section className="result">
       <div className="result__container">
         <h2 className="result__error-number">404</h2>
         <p className="result__error-description">Страница не найдена</p>
@@ -12,7 +12,7 @@ function Result() {
           Назад
         </Link>
       </div>
-    </div>
+    </section>
   );
 }
 

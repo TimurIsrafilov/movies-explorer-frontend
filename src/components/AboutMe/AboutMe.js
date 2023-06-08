@@ -4,7 +4,7 @@ import profile_photo from "../../images/profile_photo.jpg";
 
 function AboutMe() {
   return (
-    <div className="about-me">
+    <sectin className="about-me">
       <div className="about-me__container">
         <div className="about-me__title-container">
           <h2 className="about-me__title">Студент</h2>
@@ -20,7 +20,13 @@ function AboutMe() {
               на горных лыжах и велосипеде. В 2022 решил заняться
               программированием, выбрал для себя направлнение Веб-разработки.
             </p>
-            <p className="about-me__description-link">Github</p>
+            <a
+              className="about-me__description-link"
+              target="_blank"
+              href="https://github.com/TimurIsrafilov"
+            >
+              Github
+            </a>
           </div>
           <img
             className="about-me__description-photo"
@@ -29,7 +35,7 @@ function AboutMe() {
           />
         </div>
       </div>
-    </div>
+    </sectin>
   );
 }
 

@@ -11,12 +11,14 @@ import Techs from "../Techs/Techs.js";
 function Main() {
   return (
     <div className="main">
-      <Promo />
-      <NavTab />
-      <AboutProject />
-      <Techs />
-      <AboutMe />
-      <Portfolio />
+      <main className="content">
+        <Promo />
+        <NavTab />
+        <AboutProject />
+        <Techs />
+        <AboutMe />
+        <Portfolio />
+      </main>
       <Footer />
     </div>
   );

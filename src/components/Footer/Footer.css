@@ -79,6 +79,14 @@
     margin: 0;
     padding: 0;
     align-self: center;
+    text-decoration: none;
+    opacity: 1;
+    transition: 0.5s;
+}
+
+.footer__copyright:hover {
+    opacity: 0.6;
+    transition: 0.5s;
 }
 
 @media screen and (max-width: 766px) {
