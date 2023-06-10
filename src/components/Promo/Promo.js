@@ -13,11 +13,16 @@ function Promo() {
           <Link to="/signup" className="promo__menu-registration">
             {"Регистрация"}
           </Link>
-          <button type="submit" className="promo__menu-exit" aria-label="Войти">
-            <Link to="/signin" className="promo__menu-exit-text">
-              {"Войти"}
-            </Link>
-          </button>
+
+          <Link to="/signin" className="promo__menu-exit">
+            <p
+              // type="submit"
+              className="promo__menu-exit-text"
+              aria-label="Войти"
+            >
+              Войти
+            </p>
+          </Link>
         </div>
       </div>
       <div className="promo__landing-container">

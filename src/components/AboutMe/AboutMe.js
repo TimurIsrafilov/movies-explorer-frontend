@@ -4,7 +4,7 @@ import profile_photo from "../../images/profile_photo.jpg";
 
 function AboutMe() {
   return (
-    <sectin className="about-me">
+    <section className="about-me">
       <div className="about-me__container">
         <div className="about-me__title-container">
           <h2 className="about-me__title">Студент</h2>
@@ -35,7 +35,7 @@ function AboutMe() {
           />
         </div>
       </div>
-    </sectin>
+    </section>
   );
 }
 

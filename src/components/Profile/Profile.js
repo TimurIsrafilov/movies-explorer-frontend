@@ -14,7 +14,7 @@ function Profile() {
               <span className="profile-form__field-name">Имя</span>
               <input
                 id="profile-name-input"
-                type="name"
+                type="text"
                 placeholder="Имя"
                 name="name"
                 required

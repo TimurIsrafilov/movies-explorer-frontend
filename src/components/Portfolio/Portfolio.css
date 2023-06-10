@@ -66,12 +66,16 @@
 }
 
 .portfolio__item-container {
+    list-style: none;
+    border-bottom: 1px solid rgba(66, 66, 66, 1);
+}
+
+.portfolio__item-link {
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border-bottom: 1px solid rgba(66, 66, 66, 1);
     width: 1140px;
     align-items: flex-start;
     text-decoration: none;
@@ -79,26 +83,20 @@
     transition: 0.5s;
 }
 
-.portfolio__item-container:hover {
+.portfolio__item-link:hover {
     opacity: 0.6;
     transition: 0.5s;
 }
 
 @media screen and (max-width: 1278px) {
-    .portfolio__item-container {
+    .portfolio__item-link {
         width: 668px;
     }
 }
 
 @media screen and (max-width: 766px) {
-    .portfolio__item-container {
+    .portfolio__item-link {
         width: 292px;
-    }
-}
-
-@media screen and (max-width: 468px) {
-    .portfolio__item-container {
-        border-bottom: 1px solid rgba(230, 230, 230, 1);
     }
 }
 

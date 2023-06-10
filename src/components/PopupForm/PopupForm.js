@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function PopupForm() {
   return (
-    <section className="popup_opened">
+    <section className="popup">
       <div className="popup__container">
         <button
           type="button"
@@ -29,12 +29,11 @@ function PopupForm() {
               {"Сохранённые фильмы"}
             </Link>
           </div>
-
-          <button className="popup__profile" aria-label="Аккаунт">
-            <Link to="/profile" className="popup__profile-text">
-              {"Аккаунт"}
-            </Link>
-          </button>
+          <Link to="/profile" className="popup__profile">
+            <p className="popup__profile-text" aria-label="Аккаунт">
+              Аккаунт
+            </p>
+          </Link>
         </div>
       </div>
     </section>

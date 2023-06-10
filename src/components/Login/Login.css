@@ -7,7 +7,7 @@
     align-items: center;
 }
 
-.login-header__container {
+.login__header-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -16,7 +16,7 @@
 }
 
 @media screen and (max-width: 468px) {
-    .login-header__container {
+    .login__header-container {
         width: 260px;
     }
 }
@@ -66,7 +66,7 @@
     }
 }
 
-.login-form__form {
+.login__form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -76,18 +76,18 @@
 }
 
 @media screen and (max-width: 468px) {
-    .login-form__form {
+    .login__form {
         width: 260px;
     }
 }
 
-.login-form__inputs-container {
+.login__inputs-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
 }
 
-.login-form__field-name {
+.login__field-name {
     font-family: 'Inter', 'Arial', sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -99,12 +99,12 @@
 }
 
 @media screen and (max-width: 468px) {
-    .login-form__field-name {
+    .login__field-name {
         font-size: 10px;
     }
 }
 
-.login-form__input {
+.login__input {
     background-color: rgba(47, 47, 47, 1);
     height: 46px;
     width: 382px;
@@ -121,18 +121,18 @@
 }
 
 @media screen and (max-width: 468px) {
-    .login-form__input {
+    .login__input {
         width: 246px;
     }
 }
 
-.login-form__input_type_name {}
+.login__input_type_name {}
 
-.login-form__input_type_email {}
+.login__input_type_email {}
 
-.login-form__input_type_password {}
+.login__input_type_password {}
 
-.login-form__input-error {
+.login__input-error {
     font-family: 'Inter', 'Arial', sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -147,7 +147,7 @@
 
 .password-input-error {}
 
-.login-form__submit-button {
+.login__submit-button {
     height: 45px;
     width: 396px;
     background-color: rgba(66, 133, 244, 1);
@@ -165,18 +165,18 @@
 }
 
 @media screen and (max-width: 468px) {
-    .login-form__submit-button {
+    .login__submit-button {
         width: 260px;
         font-size: 12px;
     }
 }
 
-.login-form__submit-button:hover {
+.login__submit-button:hover {
     opacity: 0.6;
     transition: 0.5s;
 }
 
-.login-form__note-container {
+.login__note-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -185,12 +185,12 @@
 }
 
 @media screen and (max-width: 468px) {
-    .login-form__note-container {
+    .login__note-container {
         margin: 14px 0 18px 0;
     }
 }
 
-.login-form__note {
+.login__note {
     font-family: 'Inter', 'Arial', sans-serif;
     font-style: normal;
     font-weight: 500;
@@ -200,12 +200,12 @@
 }
 
 @media screen and (max-width: 468px) {
-    .register-form__note {
+    .register__note {
         font-size: 12px;
     }
 }
 
-.login-form__link {
+.login__link {
     font-family: 'Inter', 'Arial', sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -218,12 +218,12 @@
 }
 
 @media screen and (max-width: 468px) {
-    .login-form__link {
+    .login__link {
         font-size: 12px;
     }
 }
 
-.login-form__link:hover {
+.login__link:hover {
     opacity: 0.6;
     transition: 0.5s;
 }

@@ -22,11 +22,12 @@ function Header() {
           </div>
         </div>
         <div className="header__buttons">
-          <button className="header__profile" aria-label="Аккаунт">
-            <Link to="/profile" className="header__profile-text">
-              {"Аккаунт"}
-            </Link>
-          </button>
+          <Link to="/profile" className="header__profile">
+            <p className="header__profile-text" aria-label="Аккаунт">
+              Аккаунт
+            </p>
+          </Link>
+
           <button className="header__menu-icon" aria-label="Меню"></button>
         </div>
       </div>

@@ -7,7 +7,7 @@
     align-items: center;
 }
 
-.register-header__container {
+.register__header-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -16,7 +16,7 @@
 }
 
 @media screen and (max-width: 468px) {
-    .register-header__container {
+    .register__header-container {
         width: 260px;
     }
 }
@@ -66,7 +66,7 @@
     }
 }
 
-.register-form__form {
+.register__form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -76,18 +76,18 @@
 }
 
 @media screen and (max-width: 468px) {
-    .register-form__form {
+    .register__form {
         width: 260px;
     }
 }
 
-.register-form__inputs-container {
+.register__inputs-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
 }
 
-.register-form__field-name {
+.register__field-name {
     font-family: 'Inter', 'Arial', sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -99,12 +99,12 @@
 }
 
 @media screen and (max-width: 468px) {
-    .register-form__field-name {
+    .register__field-name {
         font-size: 10px;
     }
 }
 
-.register-form__input {
+.register__input {
     background-color: rgba(47, 47, 47, 1);
     height: 46px;
     width: 382px;
@@ -121,18 +121,18 @@
 }
 
 @media screen and (max-width: 468px) {
-    .register-form__input {
+    .register__input {
         width: 246px;
     }
 }
 
-.register-form__input_type_name {}
+.register__input_type_name {}
 
-.register-form__input_type_email {}
+.register__input_type_email {}
 
-.register-form__input_type_password {}
+.register__input_type_password {}
 
-.register-form__input-error {
+.register__input-error {
     font-family: 'Inter', 'Arial', sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -147,7 +147,7 @@
 
 .password-input-error {}
 
-.register-form__submit-button {
+.register__submit-button {
     height: 45px;
     width: 396px;
     background-color: rgba(66, 133, 244, 1);
@@ -165,18 +165,18 @@
 }
 
 @media screen and (max-width: 468px) {
-    .register-form__submit-button {
+    .register__submit-button {
         width: 260px;
         font-size: 12px;
     }
 }
 
-.register-form__submit-button:hover {
+.register__submit-button:hover {
     opacity: 0.6;
     transition: 0.5s;
 }
 
-.register-form__note-container {
+.register__note-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -185,12 +185,12 @@
 }
 
 @media screen and (max-width: 468px) {
-    .register-form__note-container {
+    .register__note-container {
         margin: 14px 0 18px 0;
     }
 }
 
-.register-form__note {
+.register__note {
     font-family: 'Inter', 'Arial', sans-serif;
     font-style: normal;
     font-weight: 500;
@@ -200,12 +200,12 @@
 }
 
 @media screen and (max-width: 468px) {
-    .register-form__note {
+    .register__note {
         font-size: 12px;
     }
 }
 
-.register-form__link {
+.register__link {
     font-family: 'Inter', 'Arial', sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -218,12 +218,12 @@
 }
 
 @media screen and (max-width: 468px) {
-    .register-form__link {
+    .register__link {
         font-size: 12px;
     }
 }
 
-.register-form__link:hover {
+.register__link:hover {
     opacity: 0.6;
     transition: 0.5s;
 }

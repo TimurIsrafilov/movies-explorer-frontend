@@ -9,7 +9,7 @@ function SearchForm() {
       <div className="search-form__container">
         <form className="search-form__container-serch">
           <div className="search-form__container-input">
-            <div className="search-form__logo-loop" alt="Лупа"></div>
+            <div className="search-form__logo-loop" title="Лупа"></div>
             <input
               id="search-film-input"
               type="text"
