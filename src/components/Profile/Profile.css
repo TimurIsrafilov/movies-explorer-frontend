@@ -111,6 +111,17 @@
     }
 }
 
+.profile-form__input-error {
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 10px;
+    color: rgba(238, 52, 101, 1);
+    margin: 0;
+    height: 10px;
+    align-self: flex-end;
+}
+
 .profile-form__input_type_name {}
 
 .profile-form__input_type_email {}
@@ -125,9 +136,11 @@
     font-size: 14px;
     color: rgba(255, 255, 255, 1);
     border: none;
-    border-radius: 2px;
     margin: 0;
     padding: 0;
+    opacity: 1;
+    transition: 0.5s;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 468px) {
@@ -136,7 +149,23 @@
     }
 }
 
+.profile-form__submit-button:hover {
+    opacity: 0.6;
+    transition: 0.5s;
+}
+
+.profile-form__submit-button_disabled {
+    color: rgba(47, 47, 47, 1);
+}
+
+.profile-form__confirm-note {
+    color: rgba(15, 150, 15, 1);
+    align-self: center;
+}
+
 .profile__exit {
+    background-color: rgba(32, 32, 32, 1);
+    border: none;
     font-family: 'Inter', 'Arial', sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -145,10 +174,18 @@
     margin: 16px 0 0 0;
     padding: 0;
     align-self: center;
+    opacity: 1;
+    transition: 0.5s;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 468px) {
     .profile__exit {
         font-size: 12px;
     }
+}
+
+.profile__exit:hover {
+    opacity: 0.6;
+    transition: 0.5s;
 }

@@ -8,6 +8,7 @@
 .moviescard__photo {
     margin: 0;
     padding: 0;
+    height: 100%;
 }
 
 .moviescard__container {
@@ -41,11 +42,41 @@
     margin: 10px 0 14px 0;
 }
 
-.moviescard__like {
-    background-color: rgba(43, 224, 128, 1);
+.moviescard__button {
+    margin: 14px 12px 0 0;
     height: 16px;
     width: 16px;
+    opacity: 1;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.moviescard__button:hover {
+    opacity: 0.6;
+    transition: 0.5s;
+}
+
+.moviescard__add {
+    height: 16px;
+    width: 16px;
+    background-color: rgba(139, 139, 139, 1);
     border: 2px solid rgba(255, 255, 255, 1);
     border-radius: 50%;
-    margin: 14px 12px 0 0;
+    cursor: pointer;
+}
+
+.moviescard__add_active {
+    background-color: rgba(43, 224, 128, 1);
+}
+
+.moviescard__delete {
+    height: 16px;
+    width: 16px;
+    background-image: url(../../images/delete_button.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(34, 34, 34, 1);
+    border: none;
+    align-self: center;
+    cursor: pointer;
 }

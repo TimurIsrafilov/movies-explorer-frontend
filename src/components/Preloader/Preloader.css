@@ -90,3 +90,11 @@
     background: rgba(43, 224, 128, 1);
     animation: preloader-inside-red 1s ease-in-out infinite;
 }
+
+.preloader__error {
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    color: rgb(188, 21, 21);
+}

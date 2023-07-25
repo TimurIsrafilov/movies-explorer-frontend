@@ -27,6 +27,7 @@
     opacity: 1;
     transition: 0.5s;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .navtab-item:hover {
@@ -43,4 +44,9 @@
         font-size: 11px;
         line-height: 12px;
     }
+}
+
+#about-project {
+    color: inherit;
+    text-decoration: inherit;
 }

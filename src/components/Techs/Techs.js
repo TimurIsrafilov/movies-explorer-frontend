@@ -1,8 +1,8 @@
 import React from "react";
 
-function Techs() {
+function Techs(props) {
   return (
-    <section className="techs">
+    <section id={props.techsId} className="techs">
       <div className="techs__container">
         <div className="techs__title-container">
           <h2 className="techs__title">Технологии</h2>

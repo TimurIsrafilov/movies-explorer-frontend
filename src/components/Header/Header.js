@@ -1,38 +1,32 @@
 import React from "react";
 
-import { Link } from "react-router-dom";
+import Navigation from "../Navigation/Navigation.js";
 
-import logo from "../../images/logo.svg";
+import { BASIC_URL } from "../../utils/Constants";
 
-function Header() {
+function Header(props) {
   return (
-    <header className="header">
-      <div className="header__container">
-        <div className="header__menu-container">
-          <Link to="/" className="header__logo">
-            <img alt="Лого" src={logo} />
-          </Link>
-          <div className="header__menu">
-            <Link to="/movies" className="header__menu-film">
-              {"Фильмы"}
-            </Link>
-            <Link to="/saved-movies" className="header__menu-saved">
-              {"Сохранённые фильмы"}
-            </Link>
-          </div>
-        </div>
-        <div className="header__buttons">
-          <Link to="/profile" className="header__profile">
-            <p className="header__profile-text" aria-label="Аккаунт">
-              Аккаунт
-            </p>
-          </Link>
-
-          <button className="header__menu-icon" aria-label="Меню"></button>
-        </div>
+    <header
+      className={`header ${
+        window.location.href == `${BASIC_URL}/` ||
+        window.location.href == `${BASIC_URL}/#aboutproject` ||
+        window.location.href == `${BASIC_URL}/#techs` ||
+        window.location.href == `${BASIC_URL}/#aboutme`
+          ? "header_main"
+          : ""
+      }`}
+    >
+      <div className="header__container_main">
+        <Navigation loggedIn={props.loggedIn} onOpen={props.onOpen} />
       </div>
     </header>
   );
 }
 
 export default Header;
+
+// className={`popup__menu-item ${
+//   window.location.href == `${BASIC_URL}/`
+//     ? "popup__menu-item_active"
+//     : ""
+// }`}
