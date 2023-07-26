@@ -15,9 +15,13 @@ function Movies(props) {
       <SearchForm
         onMoviesShort={props.onMoviesShort}
         onMoviesAll={props.onMoviesAll}
-        isShortMovies={props.isShortMovies}
+        // isShortMovies={props.isShortMovies}
         searchValue={props.searchValue}
         onSearchValue={props.onSearchValue}
+
+        isShort={props.isShort}
+
+        // tumblerState={props.tumblerState}
       />
       <Preloader
         preloader={props.preloader}

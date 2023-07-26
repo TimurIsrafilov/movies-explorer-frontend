@@ -36,6 +36,8 @@ import mainApi from "../../utils/MainApi.js";
 
 import { BEATFILMSERVER_URL } from "../../utils/Constants";
 
+import { BASIC_URL } from "../../utils/Constants";
+
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [userData, setUserData] = useState("");
@@ -46,15 +48,16 @@ function App() {
   const [beatfilmMovies, setBeatfilmMovies] = useState(false);
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
-  const [searchValue, setSearchValue] = useState("");
+  // const [searchValue, setSearchValue] = useState("");
   const [savedSearchValue, setSavedSearchValue] = useState("");
-  const [isShortMovies, setIsShortMovies] = useState(false);
+  const [isShortMovies, setIsShortMovies] = useState(null);
+  const [isShortSavedMovies, setIsShortSavedMovies] = useState(null);
   // const [searchedMovies, setSearchedMovies] = useState([]);
   const [savedSearchedMovies, setSavedSearchedMovies] = useState([]);
 
   const [preloader, setPreloader] = useState(false);
   const [preloaderError, setPreloaderError] = useState(false);
-
+////////////////////////////////////////////////////////////////////////////////////////
   // стейт ошибки
   const [error, setError] = useState({});
 
@@ -65,71 +68,113 @@ function App() {
     setError(res);
   };
 
-  // обработчик запроса и установки стейта на загрузку фильмов от beatfilm-movies
+  // состояние чекбокса короткометражки
+  const isShort =
+  window.location.href == `${BASIC_URL}/movies`
+    ? JSON.parse(localStorage.getItem("isShortMovies"))
+    : JSON.parse(localStorage.getItem("isShortSavedMovies"));
+
+  // обработка короткометражек на /movie
+  function handleSetShortMovies() {
+    setIsShortMovies(true);
+    localStorage.setItem("isShortMovies", true);
+  }
+
+  function handleSetAllMovies() {
+    setIsShortMovies(false);
+    localStorage.setItem("isShortMovies", false);
+  }
+
+  // обработка короткометражек на /saved-movie
+  function handleSetSavedShortMovies() {
+    setIsShortSavedMovies(true);
+    localStorage.setItem("isShortSavedMovies", true);
+  }
+
+  function handleSetSavedAllMovies() {
+    setIsShortSavedMovies(false);
+    localStorage.setItem("isShortSavedMovies", false);
+  }
+
+  // обработчик запроса на загрузку фильмов от beatfilm-movies
   function handleSearchValue(searchValue) {
-    setPreloader(true);
-    beatfilmApi
-      .getInitialMovies()
-      .then((movies) => {
-        localStorage.setItem("movies", JSON.stringify(movies));
-      })
-      .then(() => {
-        const localStorageMovies = JSON.parse(localStorage.getItem("movies"));
-        handleSearcheMovies(localStorageMovies);
-        setSearchValue(searchValue.searchinput);
-        setPreloader(false);
-      })
-      .catch((err) =>
-        console.log(`Ошибка.....: ${err.status}, ${err.statusText}`),
-        setPreloaderError(true)
-      );
+    const localStorageMovies = JSON.parse(localStorage.getItem("movies"));
+    if (!localStorageMovies) {
+      setPreloader(true);
+      beatfilmApi
+        .getInitialMovies()
+        .then((movies) => {
+          localStorage.setItem("movies", JSON.stringify(movies));
+        })
+        .then(() => {
+          const localStorageMovies = JSON.parse(localStorage.getItem("movies"));
+          handleSearcheMovies(localStorageMovies, searchValue);
+          localStorage.setItem("searchValue", searchValue.searchinput);
+          setPreloader(false);
+        })
+        .catch(
+          (err) => console.log(`Ошибка.....: ${err.status}, ${err.statusText}`),
+          setPreloaderError(true)
+        );
+    }
+    localStorage.setItem("searchValue", searchValue.searchinput);
   }
 
   // производится сортировка фильмов от beatfilm-movies значением поиска
-  function handleSearcheMovies(movies) {
+  function handleSearcheMovies(movies, searchValue) {
     const searchedMoviesPack = movies.filter(
       (movie) =>
-        movie.nameRU.toLowerCase().includes(searchValue.toLowerCase()) &&
-        movie.duration < (isShortMovies ? 40 : 1000)
+        movie.nameRU
+          .toLowerCase()
+          .includes(searchValue.searchinput.toLowerCase()) &&
+        movie.duration < (localStorage.getItem("isShortMovies") ? 40 : 1000)
     );
     localStorage.setItem("searchedMovies", JSON.stringify(searchedMoviesPack));
   }
 
-  // при изменении searchValue перезаписывается localStorage значением поиска
-  useEffect(() => {
-    if (searchValue) {
-      handleSearchValueLocalStorage(searchValue);
-    }
-  }, [searchValue]);
+  // обработчик запроса на отображение сохраненных фильмов
+  function handleSavedSearchValue(searchValue) {
+    localStorage.setItem("searchSavedValue", searchValue.searchinput);
 
-  function handleSearchValueLocalStorage(searchValue) {
-    localStorage.setItem("searchValue", searchValue);
-    setSearchValue(searchValue);
-  }
-  ///
-
-  function handleSavedSearchValue(savedSearchValue) {
-    setSavedSearchValue(savedSearchValue.searchinput);
-  }
-
-  useEffect(() => {
-    // setSavedSearchedMovies(savedMovies);
-    handleSavedSearchedMovies(savedMovies);
-  }, [savedMovies, savedSearchValue]);
-  // }, [ searchValue]);x
-
-  function handleSavedSearchedMovies(savedMovies) {
     if (savedSearchValue === "") {
       setSavedSearchedMovies(savedMovies);
     }
+    localStorage.setItem("searchSavedValue", searchValue.searchinput);
     setSavedSearchedMovies(
       savedMovies.filter(
         (movie) =>
-          movie.nameRU.toLowerCase().includes(savedSearchValue.toLowerCase()) &&
-          movie.duration < (isShortMovies ? 40 : 1000)
+          movie.nameRU.toLowerCase().includes(savedSearchValue.toLowerCase()) 
+          &&
+          movie.duration < (isShort ? 40 : 1000)
+      )
+    );
+
+
+  }
+
+
+  useEffect(() => {
+    handleSavedSearchedMovies(savedMovies);
+
+  }, [savedMovies, savedSearchValue]);
+  // }, [ searchValue]);x
+
+  function handleSavedSearchedMovies(savedMovies, searchValue) {
+    if (savedSearchValue === "") {
+      setSavedSearchedMovies(savedMovies);
+    }
+    localStorage.setItem("searchSavedValue", searchValue);
+    setSavedSearchedMovies(
+      savedMovies.filter(
+        (movie) =>
+          movie.nameRU.toLowerCase().includes(savedSearchValue.toLowerCase()) 
+          &&
+          movie.duration < (isShort ? 40 : 1000)
       )
     );
   }
+
+  // const tumblerState =
 
   // function handleSavedSearchValue(searchValue) {
   //   setSavedSearchValue(searchValue.search);
@@ -160,14 +205,6 @@ function App() {
   // searchedMovies = movies.filter((movie) => {
   //   return movie.nameRU.toLowerCase().includes(searchValue.toLowerCase);
   // });
-
-  function handleSetShortMovies() {
-    setIsShortMovies(true);
-  }
-
-  function handleSetAllMovies() {
-    setIsShortMovies(false);
-  }
 
   // const isLiked = movie.some((i) => i === currentUser._id);
 
@@ -376,11 +413,14 @@ function App() {
                   isOpen={popupOpen}
                   onMoviesShort={handleSetShortMovies}
                   onMoviesAll={handleSetAllMovies}
-                  isShortMovies={isShortMovies}
-                  searchValue={searchValue}
+                  // isShortMovies={isShortMovies}
+                  // searchValue={searchValue}
                   onSearchValue={handleSearchValue}
                   preloader={preloader}
                   preloaderError={preloaderError}
+                  // tumblerState={tumblerState}
+
+                  isShort={isShort}
                 />
               }
             />
@@ -396,12 +436,17 @@ function App() {
                   onOpen={handleOpenPopupButton}
                   onClose={handleClosePopupButton}
                   isOpen={popupOpen}
-                  onMoviesShort={handleSetShortMovies}
-                  onMoviesAll={handleSetAllMovies}
-                  isShortMovies={isShortMovies}
+                  // onMoviesShort={handleSetShortMovies}
+                  // onMoviesAll={handleSetAllMovies}
+                  // isShortSavedMovies={isShortSavedMovies}
                   searchValue={savedSearchValue}
                   onSearchValue={handleSavedSearchValue}
                   savedSearchedMovies={savedSearchedMovies}
+                  onMoviesShort={handleSetSavedShortMovies}
+                  onMoviesAll={handleSetSavedAllMovies}
+                  // tumblerState={tumblerState}
+
+                  isShort={isShort}
                 />
               }
             />

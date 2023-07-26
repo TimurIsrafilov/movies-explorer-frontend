@@ -24,9 +24,13 @@ function SavedMovies(props) {
       <SearchForm
         onMoviesShort={props.onMoviesShort}
         onMoviesAll={props.onMoviesAll}
-        isShortMovies={props.isShortMovies}
+        // isShortSavedMovies={props.isShortSavedMovies}
         searchValue={props.searchValue}
         onSearchValue={props.onSearchValue}
+
+        isShort={props.isShort}
+
+        // tumblerState={props.tumblerState}
       />
       <div className="saved-movies__container">
         {props.savedSearchedMovies.map(

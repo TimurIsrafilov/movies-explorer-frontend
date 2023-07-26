@@ -20,12 +20,14 @@ function SearchForm(props) {
     resetForm,
   } = Validation();
 
+
+
   const buttonTumblerClassName = `search-form__button-tumbler ${
-    props.isShortMovies && "search-form__button-tumbler_active"
+    props.isShort && "search-form__button-tumbler_active"
   }`;
 
   const searchFormButtonClassName = `search-form__button ${
-    props.isShortMovies && "search-form__button_active"
+    props.isShort && "search-form__button_active"
   }`;
 
   const handleSetShortMovies = () => {
@@ -36,15 +38,10 @@ function SearchForm(props) {
     props.onMoviesAll();
   };
 
-  /////////////////////////////////
-
-  //  const [isInputChange, setIsInputChange] = useState(false);
-
   function handleSubmit(e) {
     e.preventDefault();
 
     props.onSearchValue({ searchinput: values.searchinput });
-    //  setIsInputChange(!isInputChange)
   }
 
   useEffect(() => {
@@ -56,8 +53,6 @@ function SearchForm(props) {
           : localStorage.getItem("savedSearchValue"),
     });
   }, []);
-
-  /////////////////////////////////
 
   return (
     <section className="search-form">
@@ -80,10 +75,7 @@ function SearchForm(props) {
               onChange={handleChange}
             />
           </div>
-          <button
-            className="search-form__search-button"
-            // onSubmit={handleSubmit}
-          >
+          <button className="search-form__search-button">
             <img
               className="search-form__search-icon"
               alt="Поиск"
@@ -98,9 +90,7 @@ function SearchForm(props) {
               type="button"
               className={buttonTumblerClassName}
               aria-label="оставить короткометражки"
-              onClick={
-                props.isShortMovies ? handleSetAllMovies : handleSetShortMovies
-              }
+              onClick={props.isShort ? handleSetAllMovies : handleSetShortMovies}
             ></button>
           </div>
           <span className="search-form__logo-span">Короткометражки</span>
