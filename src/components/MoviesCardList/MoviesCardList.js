@@ -8,7 +8,7 @@ import Movies from "../Movies/Movies.js";
 
 function MoviesCardList(props) {
 
-  const searchedMovies = JSON.parse(localStorage.getItem("searchedMovies"));
+  // const searchedMovies = JSON.parse(localStorage.getItem("searchedMovies"));
 
 
 
@@ -16,7 +16,7 @@ function MoviesCardList(props) {
   return (
     <section className="moviescardlist">
       <div className="moviescardlist__container">
-        {searchedMovies ? searchedMovies.map((movie) => (
+        {props.searchedMovies ? props.searchedMovies.map((movie) => (
       //  {props.movies.map((movie) => (
           <MoviesCard
             savedMovies={props.savedMovies}

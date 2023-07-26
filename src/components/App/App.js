@@ -45,19 +45,16 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [registeredIn, setRegisteredIn] = useState(false);
 
-  const [beatfilmMovies, setBeatfilmMovies] = useState(false);
-  const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
-  // const [searchValue, setSearchValue] = useState("");
   const [savedSearchValue, setSavedSearchValue] = useState("");
   const [isShortMovies, setIsShortMovies] = useState(null);
   const [isShortSavedMovies, setIsShortSavedMovies] = useState(null);
-  // const [searchedMovies, setSearchedMovies] = useState([]);
+  const [searchedMovies, setSearchedMovies] = useState([]);
   const [savedSearchedMovies, setSavedSearchedMovies] = useState([]);
-
   const [preloader, setPreloader] = useState(false);
   const [preloaderError, setPreloaderError] = useState(false);
-////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////
+
   // стейт ошибки
   const [error, setError] = useState({});
 
@@ -70,9 +67,9 @@ function App() {
 
   // состояние чекбокса короткометражки
   const isShort =
-  window.location.href == `${BASIC_URL}/movies`
-    ? JSON.parse(localStorage.getItem("isShortMovies"))
-    : JSON.parse(localStorage.getItem("isShortSavedMovies"));
+    window.location.href == `${BASIC_URL}/movies`
+      ? JSON.parse(localStorage.getItem("isShortMovies"))
+      : JSON.parse(localStorage.getItem("isShortSavedMovies"));
 
   // обработка короткометражек на /movie
   function handleSetShortMovies() {
@@ -116,8 +113,10 @@ function App() {
           (err) => console.log(`Ошибка.....: ${err.status}, ${err.statusText}`),
           setPreloaderError(true)
         );
+    } else {
+      handleSearcheMovies(localStorageMovies, searchValue);
+      localStorage.setItem("searchValue", searchValue.searchinput);
     }
-    localStorage.setItem("searchValue", searchValue.searchinput);
   }
 
   // производится сортировка фильмов от beatfilm-movies значением поиска
@@ -127,48 +126,29 @@ function App() {
         movie.nameRU
           .toLowerCase()
           .includes(searchValue.searchinput.toLowerCase()) &&
-        movie.duration < (localStorage.getItem("isShortMovies") ? 40 : 1000)
+        movie.duration < (isShort ? 40 : 1000)
     );
     localStorage.setItem("searchedMovies", JSON.stringify(searchedMoviesPack));
+    setSearchedMovies(searchedMoviesPack);
   }
 
-  // обработчик запроса на отображение сохраненных фильмов
-  function handleSavedSearchValue(searchValue) {
-    localStorage.setItem("searchSavedValue", searchValue.searchinput);
-
-    if (savedSearchValue === "") {
-      setSavedSearchedMovies(savedMovies);
-    }
-    localStorage.setItem("searchSavedValue", searchValue.searchinput);
-    setSavedSearchedMovies(
-      savedMovies.filter(
-        (movie) =>
-          movie.nameRU.toLowerCase().includes(savedSearchValue.toLowerCase()) 
-          &&
-          movie.duration < (isShort ? 40 : 1000)
-      )
-    );
-
-
-  }
-
-
+  // отображение сохраненных фильмов
   useEffect(() => {
-    handleSavedSearchedMovies(savedMovies);
-
+    setSavedSearchedMovies(savedMovies);
   }, [savedMovies, savedSearchValue]);
-  // }, [ searchValue]);x
 
-  function handleSavedSearchedMovies(savedMovies, searchValue) {
+  // обработчик запроса на сортировку сохраненных фильмов
+  function handleSavedSearchValue(searchValue) {
     if (savedSearchValue === "") {
       setSavedSearchedMovies(savedMovies);
     }
-    localStorage.setItem("searchSavedValue", searchValue);
+    localStorage.setItem("savedSearchValue", searchValue.searchinput);
     setSavedSearchedMovies(
       savedMovies.filter(
         (movie) =>
-          movie.nameRU.toLowerCase().includes(savedSearchValue.toLowerCase()) 
-          &&
+          movie.nameRU
+            .toLowerCase()
+            .includes(searchValue.searchinput.toLowerCase()) &&
           movie.duration < (isShort ? 40 : 1000)
       )
     );
@@ -342,7 +322,7 @@ function App() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    localStorage.clear();
     setLoggedIn(false);
     navigate("/", { replace: true });
   };
@@ -404,7 +384,7 @@ function App() {
                   loggedIn={loggedIn}
                   element={Movies}
                   // movies={movies}
-                  // searchedMovies={searchedMovies}
+                  searchedMovies={searchedMovies}
                   savedMovies={savedMovies}
                   onMovieAdd={handleMovieAdd}
                   onSavedMovieDelete={handleSavedMovieDelete}

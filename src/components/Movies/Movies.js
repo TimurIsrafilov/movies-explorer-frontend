@@ -29,7 +29,7 @@ function Movies(props) {
       />
       <MoviesCardList
         // movies={props.movies}
-        // searchedMovies={props.searchedMovies}
+        searchedMovies={props.searchedMovies}
         savedMovies={props.savedMovies}
         onMovieAdd={props.onMovieAdd}
         // onMovieDelete={props.onMovieDelete}
