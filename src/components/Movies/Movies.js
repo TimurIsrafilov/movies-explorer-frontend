@@ -25,6 +25,7 @@ function Movies(props) {
       />
       <Preloader
         preloader={props.preloader}
+        loaderError={props.loaderError}
         preloaderError={props.preloaderError}
       />
       <MoviesCardList
@@ -34,6 +35,9 @@ function Movies(props) {
         onMovieAdd={props.onMovieAdd}
         // onMovieDelete={props.onMovieDelete}
         onSavedMovieDelete={props.onSavedMovieDelete}
+
+        moviesForAdd={props.moviesForAdd}
+        onClick={props.onClick}
       />
       <Footer />
       <PopupForm onClose={props.onClose} isOpen={props.isOpen} />

@@ -51,8 +51,13 @@ function App() {
   const [isShortSavedMovies, setIsShortSavedMovies] = useState(null);
   const [searchedMovies, setSearchedMovies] = useState([]);
   const [savedSearchedMovies, setSavedSearchedMovies] = useState([]);
+
+  const [moviesForAdd, setMoviesForAdd] = useState([]);
+  const [additionalMovies, setAdditionalMovies] = useState([]);
+
   const [preloader, setPreloader] = useState(false);
   const [preloaderError, setPreloaderError] = useState(false);
+  const [loaderError, setLoaderError] = useState(false);
   ////////////////////////////////////////////////////////////////////////////////////////
 
   // стейт ошибки
@@ -70,6 +75,44 @@ function App() {
     window.location.href == `${BASIC_URL}/movies`
       ? JSON.parse(localStorage.getItem("isShortMovies"))
       : JSON.parse(localStorage.getItem("isShortSavedMovies"));
+
+  // добавляемое число фильмов в зависимости от разрешения экрана
+  // const movieNumberAdd =
+
+  const [movieNumberAdd, setMovieNumberAdd] = useState(0);
+
+
+
+  function handleMovieNumberAdd() {
+    if (width >= 1280) {
+      setMovieNumberAdd(4);
+    } else if (1280 > window.innerWidth && window.innerWidth >= 1024) {
+      setMovieNumberAdd(3);
+    } else if (1024 > window.innerWidth && window.innerWidth >= 768) {
+      setMovieNumberAdd(2);
+    } else if (768 > window.innerWidth) {
+      setMovieNumberAdd(5);
+    }
+  }
+
+
+
+    const [width, setWidth] = useState(window.innerWidth);
+  
+    const updateWidth = () => {
+      setWidth(window.innerWidth);
+    };
+  
+    useEffect(() => {
+      handleMovieNumberAdd();
+      window.addEventListener("resize", updateWidth);
+      return () => window.removeEventListener("resize", updateWidth);
+    });
+
+
+
+
+
 
   // обработка короткометражек на /movie
   function handleSetShortMovies() {
@@ -98,6 +141,8 @@ function App() {
     const localStorageMovies = JSON.parse(localStorage.getItem("movies"));
     if (!localStorageMovies) {
       setPreloader(true);
+      setPreloaderError(false);
+      setLoaderError(false);
       beatfilmApi
         .getInitialMovies()
         .then((movies) => {
@@ -109,10 +154,11 @@ function App() {
           localStorage.setItem("searchValue", searchValue.searchinput);
           setPreloader(false);
         })
-        .catch(
-          (err) => console.log(`Ошибка.....: ${err.status}, ${err.statusText}`),
-          setPreloaderError(true)
-        );
+        .catch((err) => {
+          console.log(`Ошибка.....: ${err.status}, ${err.statusText}`);
+          setPreloaderError(true);
+          setPreloader(false);
+        });
     } else {
       handleSearcheMovies(localStorageMovies, searchValue);
       localStorage.setItem("searchValue", searchValue.searchinput);
@@ -121,6 +167,8 @@ function App() {
 
   // производится сортировка фильмов от beatfilm-movies значением поиска
   function handleSearcheMovies(movies, searchValue) {
+    setPreloaderError(false);
+    setLoaderError(false);
     const searchedMoviesPack = movies.filter(
       (movie) =>
         movie.nameRU
@@ -128,8 +176,29 @@ function App() {
           .includes(searchValue.searchinput.toLowerCase()) &&
         movie.duration < (isShort ? 40 : 1000)
     );
-    localStorage.setItem("searchedMovies", JSON.stringify(searchedMoviesPack));
-    setSearchedMovies(searchedMoviesPack);
+    if (searchedMoviesPack.length == 0) {
+      setLoaderError(true);
+    } else {
+      localStorage.setItem(
+        "searchedMovies",
+        JSON.stringify(searchedMoviesPack)
+      );
+      handleMovieNumberAdd();
+      const firstMoviesSetAdd = searchedMoviesPack.splice(0, movieNumberAdd);
+
+      setSearchedMovies(searchedMoviesPack);
+      setMoviesForAdd(firstMoviesSetAdd);
+    }
+  }
+
+  // отображение дополнительных найденых фильмов
+  function handleMoviesAdd() {
+    handleMovieNumberAdd();
+    const newMoviesSetAdd = searchedMovies.splice(0, movieNumberAdd);
+    const newMoviesForAdd = moviesForAdd.concat(newMoviesSetAdd);
+
+    setSearchedMovies(searchedMovies);
+    setMoviesForAdd(newMoviesForAdd);
   }
 
   // отображение сохраненных фильмов
@@ -202,7 +271,7 @@ function App() {
 
   const navigate = useNavigate();
 
-  const [popupOpen, setPopupOpen] = useState(true);
+  const [popupOpen, setPopupOpen] = useState(false);
   const [onButtonOpen, setOnButtonOpen] = useState(false);
 
   function handleOpenPopupButton() {
@@ -323,6 +392,7 @@ function App() {
 
   const handleLogout = () => {
     localStorage.clear();
+    setSearchedMovies(false);
     setLoggedIn(false);
     navigate("/", { replace: true });
   };
@@ -397,10 +467,13 @@ function App() {
                   // searchValue={searchValue}
                   onSearchValue={handleSearchValue}
                   preloader={preloader}
+                  loaderError={loaderError}
                   preloaderError={preloaderError}
                   // tumblerState={tumblerState}
 
                   isShort={isShort}
+                  moviesForAdd={moviesForAdd}
+                  onClick={handleMoviesAdd}
                 />
               }
             />
