@@ -27,7 +27,7 @@ function Main(props) {
         <Portfolio />
       </main>
       <Footer />
-      <PopupForm onClose={props.onClose} isOpen={props.isOpen}/>
+      <PopupForm onClose={props.onClose} isOpen={props.isOpen} />
     </div>
   );
 }

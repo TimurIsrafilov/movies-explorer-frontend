@@ -3,10 +3,9 @@ import React from "react";
 import Footer from "../Footer/Footer.js";
 import Header from "../Header/Header.js";
 import MoviesCardList from "../MoviesCardList/MoviesCardList.js";
+import PopupForm from "../PopupForm/PopupForm.js";
 import Preloader from "../Preloader/Preloader.js";
 import SearchForm from "../SearchForm/SearchForm.js";
-
-import PopupForm from "../PopupForm/PopupForm.js";
 
 function Movies(props) {
   return (
@@ -15,13 +14,9 @@ function Movies(props) {
       <SearchForm
         onMoviesShort={props.onMoviesShort}
         onMoviesAll={props.onMoviesAll}
-        // isShortMovies={props.isShortMovies}
         searchValue={props.searchValue}
         onSearchValue={props.onSearchValue}
-
         isShort={props.isShort}
-
-        // tumblerState={props.tumblerState}
       />
       <Preloader
         preloader={props.preloader}
@@ -29,13 +24,10 @@ function Movies(props) {
         preloaderError={props.preloaderError}
       />
       <MoviesCardList
-        // movies={props.movies}
         searchedMovies={props.searchedMovies}
         savedMovies={props.savedMovies}
         onMovieAdd={props.onMovieAdd}
-        // onMovieDelete={props.onMovieDelete}
         onSavedMovieDelete={props.onSavedMovieDelete}
-
         moviesForAdd={props.moviesForAdd}
         onClick={props.onClick}
       />

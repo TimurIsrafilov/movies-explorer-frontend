@@ -8,10 +8,10 @@ function Header(props) {
   return (
     <header
       className={`header ${
-        window.location.href == `${BASIC_URL}/` ||
-        window.location.href == `${BASIC_URL}/#aboutproject` ||
-        window.location.href == `${BASIC_URL}/#techs` ||
-        window.location.href == `${BASIC_URL}/#aboutme`
+        window.location.href === `${BASIC_URL}/` ||
+        window.location.href === `${BASIC_URL}/#aboutproject` ||
+        window.location.href === `${BASIC_URL}/#techs` ||
+        window.location.href === `${BASIC_URL}/#aboutme`
           ? "header_main"
           : ""
       }`}
@@ -24,9 +24,3 @@ function Header(props) {
 }
 
 export default Header;
-
-// className={`popup__menu-item ${
-//   window.location.href == `${BASIC_URL}/`
-//     ? "popup__menu-item_active"
-//     : ""
-// }`}

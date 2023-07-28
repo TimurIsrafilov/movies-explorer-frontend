@@ -18,10 +18,10 @@ function Profile(props) {
     e.preventDefault();
 
     props.onUpdateUser({
-      email: values.email,
       name: values.name,
+      email: values.email,
     });
-    setIsInputChange(!isInputChange)
+    setIsInputChange(!isInputChange);
   }
 
   useEffect(() => {

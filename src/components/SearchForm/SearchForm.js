@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import search_icon from "../../images/search_icon.svg";
 
@@ -9,16 +9,7 @@ import { Validation } from "../../utils/Validation";
 import { BASIC_URL } from "../../utils/Constants";
 
 function SearchForm(props) {
-  const {
-    handleChange,
-    values,
-    setValues,
-    errors,
-    setErrors,
-    isValid,
-    setIsValid,
-    resetForm,
-  } = Validation();
+  const { handleChange, values, setValues, errors } = Validation();
 
   const buttonTumblerClassName = `search-form__button-tumbler ${
     props.isShort && "search-form__button-tumbler_active"
@@ -46,7 +37,7 @@ function SearchForm(props) {
     setValues({
       ...values,
       searchinput:
-        window.location.href == `${BASIC_URL}/movies`
+        window.location.href === `${BASIC_URL}/movies`
           ? localStorage.getItem("searchValue")
           : localStorage.getItem("savedSearchValue"),
     });

@@ -11,9 +11,6 @@ import SearchForm from "../SearchForm/SearchForm.js";
 function SavedMovies(props) {
   const currentUser = React.useContext(CurrentUserContext);
 
-  // onClose={closePopup}
-
-  // const isOwn = props.savedMovies.owner === currentUser._id;
   const isOwn = props.savedSearchedMovies.find(
     (item) => item.owner === currentUser._id
   );
@@ -24,13 +21,8 @@ function SavedMovies(props) {
       <SearchForm
         onMoviesShort={props.onMoviesShort}
         onMoviesAll={props.onMoviesAll}
-        // isShortSavedMovies={props.isShortSavedMovies}
-        searchValue={props.searchValue}
         onSearchValue={props.onSearchValue}
-
         isShort={props.isShort}
-
-        // tumblerState={props.tumblerState}
       />
       <div className="saved-movies__container">
         {props.savedSearchedMovies.map(
@@ -48,9 +40,6 @@ function SavedMovies(props) {
               />
             )
         )}
-      </div>
-      <div className="saved-movies__add-container">
-        {/* <button className="saved-movies__add">Ещё</button> */}
       </div>
       <Footer />
       <PopupForm onClose={props.onClose} isOpen={props.isOpen} />

@@ -65,7 +65,7 @@ class Api {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "https://api.itf.nomoredomains.monster",
+        "Access-Control-Allow-Origin": "http://localhost:3001",
         authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({

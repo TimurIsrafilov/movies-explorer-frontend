@@ -1,11 +1,8 @@
 import React from "react";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 import { BASIC_URL, BEATFILMSERVER_URL } from "../../utils/Constants";
 
 function MoviesCard(props) {
-  const currentUser = React.useContext(CurrentUserContext);
-
   const handleMovieClick = (e) => {
     e.preventDefault();
     window.location.href = `${props.trailerLink}`;
@@ -20,7 +17,9 @@ function MoviesCard(props) {
   };
 
   const handleMovieDelete = () => {
-    const movie = props.savedMovies.find((item) => item.movieId === props.movie.id);
+    const movie = props.savedMovies.find(
+      (item) => item.movieId === props.movie.id
+    );
     props.onSavedMovieDelete(movie);
   };
 
@@ -33,11 +32,10 @@ function MoviesCard(props) {
     return time;
   }
 
-  // const isOwn = props.card.owner === currentUser._id;
+  const moviesPage = window.location.href === `${BASIC_URL}/movies`;
 
-  const moviesPage = window.location.href == `${BASIC_URL}/movies`;
-
-  const isLiked = moviesPage &&
+  const isLiked =
+    moviesPage &&
     props.savedMovies.find((item) => item.movieId === props.movie.id);
 
   const movieLikeButtonClassName = `moviescard__add ${

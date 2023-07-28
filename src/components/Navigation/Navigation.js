@@ -3,9 +3,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import logo from "../../images/logo.svg";
+
 import { BASIC_URL } from "../../utils/Constants";
 
 function Navigation(props) {
+  
   function openPopup() {
     props.onOpen();
   }
@@ -49,10 +51,10 @@ function Navigation(props) {
             {props.loggedIn ? (
               <button
                 className={`navigation__menu-icon ${
-                  window.location.href == `${BASIC_URL}/` ||
-                  window.location.href == `${BASIC_URL}/#aboutproject` ||
-                  window.location.href == `${BASIC_URL}/#techs` ||
-                  window.location.href == `${BASIC_URL}/#aboutme`
+                  window.location.href === `${BASIC_URL}/` ||
+                  window.location.href === `${BASIC_URL}/#aboutproject` ||
+                  window.location.href === `${BASIC_URL}/#techs` ||
+                  window.location.href === `${BASIC_URL}/#aboutme`
                     ? "navigation__menu-icon_main"
                     : ""
                 }`}
@@ -76,11 +78,7 @@ function Navigation(props) {
             ""
           ) : (
             <Link to="/signin" className="navigation__menu-exit">
-              <p
-                // type="submit"
-                className="navigation__menu-exit-text"
-                aria-label="Войти"
-              >
+              <p className="navigation__menu-exit-text" aria-label="Войти">
                 Войти
               </p>
             </Link>
@@ -92,13 +90,3 @@ function Navigation(props) {
 }
 
 export default Navigation;
-
-// {
-//   props.loggedIn ? (
-//     <Link to="/movies" className="navigation__menu-movie">
-//       {"Фильмы"}
-//     </Link>
-//   ) : (
-//     ""
-//   );
-// }
