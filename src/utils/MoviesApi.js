@@ -23,7 +23,7 @@ const beatfilmApi = new Api({
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin":
       "https://api.nomoreparties.co/beatfilm-movies",
-      authorization: `Bearer ${localStorage.getItem('token')}`,
+    authorization: `Bearer ${localStorage.getItem("token")}`,
   },
 });
 

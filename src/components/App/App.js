@@ -256,12 +256,6 @@ function App() {
 
   // обоработчик добавления понравившегося фильма
   function handleMovieAdd(movie) {
-    // const doubleMovie = savedMovies.find(
-    //   (item) => item.movieId === movie.id
-    // );
-    // if (doubleMovie) {
-    //   showError( {status: 404, statusText: "фильм уже существует"});
-    // }
     mainApi
       .addNewMovie(
         movie.country,
@@ -315,6 +309,7 @@ function App() {
           localStorage.setItem("token", res.token);
           setLoggedIn(true);
           setCurrentUser(res);
+          setSavedMovies(savedMovies);
           navigate("/movies", { replace: true });
         }
       })

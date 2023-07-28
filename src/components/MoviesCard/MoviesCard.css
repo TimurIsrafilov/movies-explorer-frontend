@@ -8,7 +8,22 @@
 .moviescard__photo {
     margin: 0;
     padding: 0;
-    height: 100%;
+    height: 151px;
+    width: 270px;
+}
+
+@media screen and (max-width: 1024px) {
+    .moviescard__photo  {
+        height: 190px;
+        width: 339px;
+    }
+}
+
+@media screen and (max-width: 766px) {
+    .moviescard__photo  {
+        height: 168px;
+        width: 290px;
+    }
 }
 
 .moviescard__container {
