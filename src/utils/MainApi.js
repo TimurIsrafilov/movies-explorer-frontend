@@ -17,7 +17,7 @@ class Api {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "http://localhost:3001",
+        "Access-Control-Allow-Origin": "https://api.movies-explorer-itf.nomoredomains.monster",
         authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then(this._getResponseData);
@@ -29,7 +29,7 @@ class Api {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "http://localhost:3001",
+        "Access-Control-Allow-Origin": "https://api.movies-explorer-itf.nomoredomains.monster",
       },
       body: JSON.stringify({ name, email, password }),
     }).then(this._getResponseData);
@@ -41,7 +41,7 @@ class Api {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "http://localhost:3001",
+        "Access-Control-Allow-Origin": "https://api.movies-explorer-itf.nomoredomains.monster",
       },
       body: JSON.stringify({ email, password }),
     }).then(this._getResponseData);
@@ -53,7 +53,7 @@ class Api {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "http://localhost:3001",
+        "Access-Control-Allow-Origin": "https://api.movies-explorer-itf.nomoredomains.monster",
         Authorization: `Bearer ${token}`,
       },
     }).then(this._getResponseData);
@@ -65,7 +65,7 @@ class Api {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "http://localhost:3001",
+        "Access-Control-Allow-Origin": "https://api.movies-explorer-itf.nomoredomains.monster",
         authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({
@@ -81,7 +81,7 @@ class Api {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "http://localhost:3001",
+        "Access-Control-Allow-Origin": "https://api.movies-explorer-itf.nomoredomains.monster",
         authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then(this._getResponseData);
@@ -106,7 +106,7 @@ class Api {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "http://localhost:3001",
+        "Access-Control-Allow-Origin": "https://api.movies-explorer-itf.nomoredomains.monster",
         authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       body: JSON.stringify({
@@ -132,7 +132,7 @@ class Api {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "http://localhost:3001",
+        "Access-Control-Allow-Origin": "https://api.movies-explorer-itf.nomoredomains.monster",
         authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then(this._getResponseData);
@@ -140,11 +140,11 @@ class Api {
 }
 
 const mainApi = new Api({
-  baseUrl: "http://localhost:3001",
+  baseUrl: "https://api.movies-explorer-itf.nomoredomains.monster",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "http://localhost:3001",
+    "Access-Control-Allow-Origin": "https://api.movies-explorer-itf.nomoredomains.monster",
     authorization: `Bearer ${localStorage.getItem("token")}`,
   },
 });
