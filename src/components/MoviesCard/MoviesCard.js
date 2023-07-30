@@ -1,6 +1,11 @@
 import React from "react";
 
-import { BASIC_URL, BEATFILMSERVER_URL } from "../../utils/Constants";
+import {
+  // BASIC_URL,
+  BASIC_HTTP_URL,
+  BASIC_HTTPS_URL,
+  BEATFILMSERVER_URL,
+} from "../../utils/Constants";
 
 function MoviesCard(props) {
   const handleMovieClick = (e) => {
@@ -32,7 +37,9 @@ function MoviesCard(props) {
     return time;
   }
 
-  const moviesPage = window.location.href === `${BASIC_URL}/movies`;
+  const moviesPage =
+    window.location.href === `${BASIC_HTTP_URL}/movies` ||
+    window.location.href === `${BASIC_HTTPS_URL}/movies`;
 
   const isLiked =
     moviesPage &&

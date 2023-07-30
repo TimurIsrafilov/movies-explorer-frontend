@@ -30,8 +30,12 @@ import ProtectedRoute from "../../utils/ProtectedRoute.js";
 import beatfilmApi from "../../utils/MoviesApi.js";
 import mainApi from "../../utils/MainApi.js";
 
-import { BASIC_URL } from "../../utils/Constants";
-import { BEATFILMSERVER_URL } from "../../utils/Constants";
+import {
+  // BASIC_URL,
+  BASIC_HTTP_URL,
+  BASIC_HTTPS_URL,
+  BEATFILMSERVER_URL,
+} from "../../utils/Constants";
 
 import "./App.css";
 
@@ -82,7 +86,8 @@ function App() {
 
   // состояние чекбокса короткометражки
   const isShort =
-    window.location.href === `${BASIC_URL}/movies`
+    window.location.href === `${BASIC_HTTP_URL}/movies` ||
+    window.location.href === `${BASIC_HTTPS_URL}/movies`
       ? JSON.parse(localStorage.getItem("isShortMovies"))
       : JSON.parse(localStorage.getItem("isShortSavedMovies"));
 

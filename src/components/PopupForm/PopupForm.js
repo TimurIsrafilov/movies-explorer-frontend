@@ -2,7 +2,11 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 
-import { BASIC_URL } from "../../utils/Constants";
+import {
+  // BASIC_URL,
+  BASIC_HTTP_URL,
+  BASIC_HTTPS_URL,
+} from "../../utils/Constants";
 
 function PopupForm(props) {
   return (
@@ -21,7 +25,8 @@ function PopupForm(props) {
                 <Link
                   to="/"
                   className={`popup__menu-item ${
-                    window.location.href === `${BASIC_URL}/`
+                    window.location.href === `${BASIC_HTTP_URL}/` ||
+                    window.location.href === `${BASIC_HTTPS_URL}/`
                       ? "popup__menu-item_active"
                       : ""
                   }`}
@@ -31,7 +36,8 @@ function PopupForm(props) {
                 <Link
                   to="/movies"
                   className={`popup__menu-item ${
-                    window.location.href === `${BASIC_URL}/movies`
+                    window.location.href === `${BASIC_HTTP_URL}/movies` ||
+                    window.location.href === `${BASIC_HTTPS_URL}/movies`
                       ? "popup__menu-item_active"
                       : ""
                   }`}
@@ -41,7 +47,8 @@ function PopupForm(props) {
                 <Link
                   to="/saved-movies"
                   className={`popup__menu-item ${
-                    window.location.href === `${BASIC_URL}/saved-movies`
+                    window.location.href === `${BASIC_HTTP_URL}/saved-movies` ||
+                    window.location.href === `${BASIC_HTTPS_URL}/saved-movies`
                       ? "popup__menu-item_active"
                       : ""
                   }`}
