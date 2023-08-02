@@ -31,10 +31,23 @@ import beatfilmApi from "../../utils/MoviesApi.js";
 import mainApi from "../../utils/MainApi.js";
 
 import {
-  // BASIC_URL,
+  BASIC_URL,
   BASIC_HTTP_URL,
   BASIC_HTTPS_URL,
   BEATFILMSERVER_URL,
+  SHORT_MOVIE,
+  LONG_MOVIE,
+  DESKTOP_SCREEN,
+  TABLET_SCREEN,
+  MOBILE_SCREEN,
+  DESKTOP_FIRST_MOVIES_4X4,
+  DESKTOP_FIRST_MOVIES_4X3,
+  TABLET_FIRST_MOVIES,
+  MOBILE_FIRST_MOVIES,
+  DESKTOP_NEXT_MOVIES_4,
+  DESKTOP_NEXT_MOVIES_3,
+  TABLET_NEXT_MOVIES,
+  MOBILE_NEXT_MOVIES,
 } from "../../utils/Constants";
 
 import "./App.css";
@@ -69,6 +82,8 @@ function App() {
   const [error, setError] = useState({});
   // стейт количества добавляемых фильмов
   const [movieNumberAdd, setMovieNumberAdd] = useState(0);
+  // стейт количества добавляемых фильмов "ЕЩЕ"
+  const [nextMovieNumberAdd, setNextMovieNumberAdd] = useState(0);
   // стейт ширины экрана
   const [width, setWidth] = useState(window.innerWidth);
   // стейты попапа
@@ -80,12 +95,13 @@ function App() {
   // обработка общей ошибки
   const showError = (res) => {
     console.log(`Ошибка.....: ${res.status}, ${res.statusText}`);
-    navigate("/error", { replace: true });
+    navigate("/error");
     setError(res);
   };
 
   // состояние чекбокса короткометражки
   const isShort =
+    window.location.href === `${BASIC_URL}/movies` ||
     window.location.href === `${BASIC_HTTP_URL}/movies` ||
     window.location.href === `${BASIC_HTTPS_URL}/movies`
       ? JSON.parse(localStorage.getItem("isShortMovies"))
@@ -93,14 +109,43 @@ function App() {
 
   // добавляемое число фильмов в зависимости от разрешения экрана
   function handleMovieNumberAdd() {
-    if (width >= 1280) {
-      setMovieNumberAdd(4);
-    } else if (1280 > window.innerWidth && window.innerWidth >= 1024) {
-      setMovieNumberAdd(3);
-    } else if (1024 > window.innerWidth && window.innerWidth >= 768) {
-      setMovieNumberAdd(2);
-    } else if (768 > window.innerWidth) {
-      setMovieNumberAdd(5);
+    if (width >= DESKTOP_SCREEN) {
+      setMovieNumberAdd(DESKTOP_FIRST_MOVIES_4X4);
+      localStorage.setItem("movieNumberAdd", DESKTOP_FIRST_MOVIES_4X4);
+    } else if (
+      DESKTOP_SCREEN > window.innerWidth &&
+      window.innerWidth >= TABLET_SCREEN
+    ) {
+      setMovieNumberAdd(DESKTOP_FIRST_MOVIES_4X3);
+      localStorage.setItem("movieNumberAdd", DESKTOP_FIRST_MOVIES_4X4);
+    } else if (
+      TABLET_SCREEN > window.innerWidth &&
+      window.innerWidth >= MOBILE_SCREEN
+    ) {
+      setMovieNumberAdd(TABLET_FIRST_MOVIES);
+      localStorage.setItem("movieNumberAdd", TABLET_FIRST_MOVIES);
+    } else if (MOBILE_SCREEN > window.innerWidth) {
+      setMovieNumberAdd(MOBILE_FIRST_MOVIES);
+      localStorage.setItem("movieNumberAdd", MOBILE_FIRST_MOVIES);
+    }
+  }
+
+  // добавляемое число фильмов "ЕЩЕ" в зависимости от разрешения экрана
+  function handleNextMovieNumberAdd() {
+    if (width >= DESKTOP_SCREEN) {
+      setNextMovieNumberAdd(DESKTOP_NEXT_MOVIES_4);
+    } else if (
+      DESKTOP_SCREEN > window.innerWidth &&
+      window.innerWidth >= TABLET_SCREEN
+    ) {
+      setNextMovieNumberAdd(DESKTOP_NEXT_MOVIES_3);
+    } else if (
+      TABLET_SCREEN > window.innerWidth &&
+      window.innerWidth >= MOBILE_SCREEN
+    ) {
+      setNextMovieNumberAdd(TABLET_NEXT_MOVIES);
+    } else if (MOBILE_SCREEN > window.innerWidth) {
+      setNextMovieNumberAdd(MOBILE_NEXT_MOVIES);
     }
   }
 
@@ -112,6 +157,7 @@ function App() {
   // слушатель разрешения экрана
   useEffect(() => {
     handleMovieNumberAdd();
+    handleNextMovieNumberAdd();
     window.addEventListener("resize", updateWidth);
     return () => window.removeEventListener("resize", updateWidth);
   });
@@ -137,6 +183,24 @@ function App() {
     setIsShortSavedMovies(false);
     localStorage.setItem("isShortSavedMovies", false);
   }
+
+  // отображение сохраненных фильмов роут /movie
+  useEffect(() => {
+    if (localStorage.getItem("searchedMovies")) {
+      const searchedMovies = JSON.parse(localStorage.getItem("searchedMovies"));
+      const searchValue = localStorage.getItem("searchValue");
+      const movieNumberAdd = localStorage.getItem("movieNumberAdd");
+      const searchedMoviesPack = searchedMovies.filter(
+        (movie) =>
+          movie.nameRU.toLowerCase().includes(searchValue.toLowerCase()) &&
+          movie.duration < (isShort ? SHORT_MOVIE : LONG_MOVIE)
+      );
+      const firstMoviesSetAdd = searchedMoviesPack.splice(0, movieNumberAdd);
+
+      setMoviesForAdd(firstMoviesSetAdd);
+      setSearchedMovies(searchedMoviesPack);
+    }
+  }, []);
 
   // обработчик запроса на загрузку фильмов от beatfilm-movies на роут /movie
   function handleSearchValue(searchValue) {
@@ -176,7 +240,7 @@ function App() {
         movie.nameRU
           .toLowerCase()
           .includes(searchValue.searchinput.toLowerCase()) &&
-        movie.duration < (isShort ? 40 : 1000)
+        movie.duration < (isShort ? SHORT_MOVIE : LONG_MOVIE)
     );
     if (searchedMoviesPack.length === 0) {
       setLoaderError(true);
@@ -195,8 +259,8 @@ function App() {
 
   // отображение дополнительных найденых фильмов роут /movie
   function handleMoviesAdd() {
-    handleMovieNumberAdd();
-    const newMoviesSetAdd = searchedMovies.splice(0, movieNumberAdd);
+    handleNextMovieNumberAdd();
+    const newMoviesSetAdd = searchedMovies.splice(0, nextMovieNumberAdd);
     const newMoviesForAdd = moviesForAdd.concat(newMoviesSetAdd);
 
     setSearchedMovies(searchedMovies);
@@ -206,7 +270,7 @@ function App() {
   // отображение сохраненных фильмов роут /saved-movie
   useEffect(() => {
     setSavedSearchedMovies(savedMovies);
-  }, [savedMovies, savedSearchValue]);
+  }, [savedMovies]);
 
   // обработчик запроса на сортировку сохраненных фильмов роут /saved-movie
   function handleSavedSearchValue(searchValue) {
@@ -220,7 +284,7 @@ function App() {
           movie.nameRU
             .toLowerCase()
             .includes(searchValue.searchinput.toLowerCase()) &&
-          movie.duration < (isShort ? 40 : 1000)
+          movie.duration < (isShort ? SHORT_MOVIE : LONG_MOVIE)
       )
     );
   }
@@ -313,6 +377,7 @@ function App() {
         if (res.token) {
           localStorage.setItem("token", res.token);
           setLoggedIn(true);
+          localStorage.setItem("loggedIn", true);
           setCurrentUser(res);
           setSavedMovies(savedMovies);
           navigate("/movies", { replace: true });
@@ -341,11 +406,17 @@ function App() {
         .checkToken(token)
         .then((res) => {
           setLoggedIn(true);
-          navigate("/", { replace: true });
+          localStorage.setItem("loggedIn", true);
         })
-        .catch((err) =>
-          console.log(`Ошибка.....: ${err.status}, ${err.statusText}`)
-        );
+        .catch((err) => {
+          console.log(`Ошибка.....: ${err.status}, ${err.statusText}`);
+          setLoggedIn(false);
+          localStorage.setItem("loggedIn", false);
+          navigate("/", { replace: true });
+        });
+    } else {
+      setLoggedIn(false);
+      localStorage.setItem("loggedIn", false);
     }
   };
 
@@ -361,20 +432,31 @@ function App() {
             <Route
               path="*"
               element={
-                loggedIn ? (
-                  <Navigate to="/" replace />
+                <Result
+                  error={{ status: "404", statusText: "Page is not found" }}
+                />
+              }
+            />
+
+            <Route
+              path="/signup"
+              element={
+                !loggedIn ? (
+                  <Register handleRegister={handleRegister} />
                 ) : (
-                  <Navigate to="/signup" replace />
+                  <Navigate to="/" replace />
                 )
               }
             />
             <Route
-              path="/signup"
-              element={<Register handleRegister={handleRegister} />}
-            />
-            <Route
               path="/signin"
-              element={<Login handleLogin={handleLogin} />}
+              element={
+                !loggedIn ? (
+                  <Login handleLogin={handleLogin} />
+                ) : (
+                  <Navigate to="/" replace />
+                )
+              }
             />
             <Route
               path="/"

@@ -1,7 +1,7 @@
 import React from "react";
 
 import {
-  // BASIC_URL,
+  BASIC_URL,
   BASIC_HTTP_URL,
   BASIC_HTTPS_URL,
   BEATFILMSERVER_URL,
@@ -38,6 +38,7 @@ function MoviesCard(props) {
   }
 
   const moviesPage =
+    window.location.href === `${BASIC_URL}/movies` ||
     window.location.href === `${BASIC_HTTP_URL}/movies` ||
     window.location.href === `${BASIC_HTTPS_URL}/movies`;
 

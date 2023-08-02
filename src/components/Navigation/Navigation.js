@@ -1,14 +1,23 @@
 import React from "react";
 
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import logo from "../../images/logo.svg";
 
 import {
-  // BASIC_URL,
+  BASIC_URL,
   BASIC_HTTP_URL,
   BASIC_HTTPS_URL,
 } from "../../utils/Constants";
+
+<NavLink
+  to="/messages"
+  className={({ isActive, isPending }) =>
+    isPending ? "pending" : isActive ? "active" : ""
+  }
+>
+  Messages
+</NavLink>;
 
 function Navigation(props) {
   function openPopup() {
@@ -25,17 +34,34 @@ function Navigation(props) {
         <div className="navigation__menu_registered">
           <div className="navigation__menu-container">
             {props.loggedIn ? (
-              <Link to="/movies" className="navigation__menu-movie">
+              <NavLink
+                to="/movies"
+                className={({ isActive, isPending }) =>
+                  isPending ? "navigation__menu-movie"
+                    : isActive
+                    ? "navigation__menu-movie navigation__menu-movie_active"
+                    : "navigation__menu-movie"
+                }
+              >
                 {"Фильмы"}
-              </Link>
+              </NavLink>
             ) : (
               ""
             )}
 
             {props.loggedIn ? (
-              <Link to="/saved-movies" className="navigation__menu-saved">
+              <NavLink
+                to="/saved-movies"
+                className={({ isActive, isPending }) =>
+                  isPending
+                    ? "navigation__menu-saved"
+                    : isActive
+                    ? "navigation__menu-saved navigation__menu-saved_active"
+                    : "navigation__menu-saved"
+                }
+              >
                 {"Сохранённые фильмы"}
-              </Link>
+              </NavLink>
             ) : (
               ""
             )}
@@ -54,6 +80,10 @@ function Navigation(props) {
             {props.loggedIn ? (
               <button
                 className={`navigation__menu-icon ${
+                  window.location.href === `${BASIC_URL}/` ||
+                  window.location.href === `${BASIC_URL}/#aboutproject` ||
+                  window.location.href === `${BASIC_URL}/#techs` ||
+                  window.location.href === `${BASIC_URL}/#aboutme` ||
                   window.location.href === `${BASIC_HTTP_URL}/` ||
                   window.location.href === `${BASIC_HTTPS_URL}/` ||
                   window.location.href === `${BASIC_HTTP_URL}/#aboutproject` ||

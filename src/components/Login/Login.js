@@ -14,7 +14,7 @@ function Login(props) {
       return;
     }
     props.handleLogin(values);
-    resetForm({ email: "", password: "" });
+    // resetForm({ email: "", password: "" });
   };
 
   return (

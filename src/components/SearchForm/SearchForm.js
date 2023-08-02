@@ -7,7 +7,7 @@ import search_icon from "../../images/search_icon.svg";
 import { Validation } from "../../utils/Validation";
 
 import {
-  // BASIC_URL,
+  BASIC_URL,
   BASIC_HTTP_URL,
   BASIC_HTTPS_URL,
 } from "../../utils/Constants";
@@ -41,6 +41,7 @@ function SearchForm(props) {
     setValues({
       ...values,
       searchinput:
+        window.location.href === `${BASIC_URL}/movies` ||
         window.location.href === `${BASIC_HTTP_URL}/movies` ||
         window.location.href === `${BASIC_HTTPS_URL}/movies`
           ? localStorage.getItem("searchValue")

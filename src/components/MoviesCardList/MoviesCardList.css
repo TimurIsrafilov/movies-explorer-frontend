@@ -77,7 +77,3 @@
     opacity: 0.6;
     transition: 0.5s;
 }
-
-.moviescardlist__add_disabled {
-    background-color: rgba(47, 47, 47, 1);
-}

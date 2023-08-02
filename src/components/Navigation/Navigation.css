@@ -56,7 +56,7 @@
     visibility: visible;
     font-family: 'Inter', 'Arial', sans-serif;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 400;
     font-size: 13px;
     line-height: 18px;
     color: rgba(255, 255, 255, 1);
@@ -66,6 +66,10 @@
     text-decoration: none;
     opacity: 1;
     transition: 0.5s;
+}
+
+.navigation__menu-movie_active {
+    font-weight: 500;
 }
 
 @media screen and (max-width: 768px) {
@@ -94,6 +98,10 @@
     text-decoration: none;
     opacity: 1;
     transition: 0.5s;
+}
+
+.navigation__menu-saved_active {
+    font-weight: 500;
 }
 
 @media screen and (max-width: 768px) {

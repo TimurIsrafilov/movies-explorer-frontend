@@ -23,20 +23,26 @@ function MoviesCardList(props) {
             ))
           : ""}
       </div>
-      <div className="moviescardlist__add-container">
-        <button
-          type="button"
-          className={`moviescardlist__add ${
-            props.searchedMovies.length !== 0
-              ? ""
-              : "moviescardlist__add_disabled"
-          }`}
-          aria-label="Ещё"
-          disabled={`${props.searchedMovies.length !== 0 ? "" : "disabled"}`}
-          onClick={props.onClick}
-        >
-          Ещё
-        </button>
+
+      <div
+        className={`${
+          props.searchedMovies.length !== 0
+            ? "moviescardlist__add-container"
+            : ""
+        }`}
+      >
+        {props.searchedMovies.length !== 0 ? (
+          <button
+            type="button"
+            className="moviescardlist__add"
+            aria-label="Ещё"
+            onClick={props.onClick}
+          >
+            Ещё
+          </button>
+        ) : (
+          ""
+        )}
       </div>
     </section>
   );
