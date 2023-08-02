@@ -200,7 +200,7 @@ function App() {
       setMoviesForAdd(firstMoviesSetAdd);
       setSearchedMovies(searchedMoviesPack);
     }
-  }, []);
+  }, [isShortMovies]);
 
   // обработчик запроса на загрузку фильмов от beatfilm-movies на роут /movie
   function handleSearchValue(searchValue) {
@@ -269,8 +269,12 @@ function App() {
 
   // отображение сохраненных фильмов роут /saved-movie
   useEffect(() => {
-    setSavedSearchedMovies(savedMovies);
-  }, [savedMovies]);
+    setSavedSearchedMovies(
+      savedMovies.filter(
+        (movie) => movie.duration < (isShort ? SHORT_MOVIE : LONG_MOVIE)
+      )
+    );
+  }, [savedMovies, isShortSavedMovies]);
 
   // обработчик запроса на сортировку сохраненных фильмов роут /saved-movie
   function handleSavedSearchValue(searchValue) {
@@ -395,6 +399,8 @@ function App() {
     setMoviesForAdd([]);
     setSavedSearchedMovies([]);
     setLoggedIn(false);
+    setIsShortMovies(null);
+    setIsShortSavedMovies(null);
     navigate("/", { replace: true });
   };
 
