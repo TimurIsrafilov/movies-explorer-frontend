@@ -1,4 +1,10 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
+
+import {
+  VALID_ERR_NAME,
+  VALID_ERR_EMAIL,
+  VALID_ERR_PASS,
+} from "./Constants";
 
 export function Validation() {
   const [values, setValues] = useState({});
@@ -12,19 +18,19 @@ export function Validation() {
 
     if (name === "name") {
       const validName = value.match(/^[а-яА-ЯёЁa-zA-Z0-9\-\s]+$/i);
-      setErrors({ ...errors, [name]: validName ? "" : " Нужно ввести имя" });
+      setErrors({ ...errors, [name]: validName ? "" : VALID_ERR_NAME });
     }
     if (name === "email") {
       const validEmail = value.match(
         /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
       );
-      setErrors({ ...errors, [name]: validEmail ? "" : " Невалидный email" });
+      setErrors({ ...errors, [name]: validEmail ? "" : VALID_ERR_EMAIL });
     }
     if (name === "password") {
       const validPassword = value.length >= 1;
       setErrors({
         ...errors,
-        [name]: validPassword ? "" : " Нужно ввести пароль",
+        [name]: validPassword ? "" : VALID_ERR_PASS,
       });
     }
     // if (name === "searchinput") {

@@ -31,7 +31,7 @@ import beatfilmApi from "../../utils/MoviesApi.js";
 import mainApi from "../../utils/MainApi.js";
 
 import {
-  BASIC_URL,
+  // BASIC_URL,
   BASIC_HTTP_URL,
   BASIC_HTTPS_URL,
   BEATFILMSERVER_URL,
@@ -48,6 +48,8 @@ import {
   DESKTOP_NEXT_MOVIES_3,
   TABLET_NEXT_MOVIES,
   MOBILE_NEXT_MOVIES,
+  ERR_PAGE_NOT_FOUND,
+  ERR_PAGE_404,
 } from "../../utils/Constants";
 
 import "./App.css";
@@ -101,7 +103,7 @@ function App() {
 
   // состояние чекбокса короткометражки
   const isShort =
-    window.location.href === `${BASIC_URL}/movies` ||
+    // window.location.href === `${BASIC_URL}/movies` ||
     window.location.href === `${BASIC_HTTP_URL}/movies` ||
     window.location.href === `${BASIC_HTTPS_URL}/movies`
       ? JSON.parse(localStorage.getItem("isShortMovies"))
@@ -439,7 +441,10 @@ function App() {
               path="*"
               element={
                 <Result
-                  error={{ status: "404", statusText: "Page is not found" }}
+                  error={{
+                    status: ERR_PAGE_404,
+                    statusText: ERR_PAGE_NOT_FOUND,
+                  }}
                 />
               }
             />
