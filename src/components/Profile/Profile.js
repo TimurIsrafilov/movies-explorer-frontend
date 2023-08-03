@@ -24,6 +24,9 @@ function Profile(props) {
     setIsInputChange(!isInputChange);
   }
 
+  const isChanged =
+    values.name !== currentUser.name || values.email !== currentUser.email;
+
   useEffect(() => {
     setValues({
       ...values,
@@ -93,10 +96,12 @@ function Profile(props) {
           <button
             type="submit"
             className={`profile-form__submit-button ${
-              isValid ? "" : "profile-form__submit-button_disabled"
+              isValid && isChanged
+                ? ""
+                : "profile-form__submit-button_disabled"
             }`}
             aria-label="Редактировать"
-            disabled={`${isValid ? "" : "disabled"}`}
+            disabled={`${isValid && isChanged ? "" : "disabled"}`}
           >
             Редактировать
           </button>

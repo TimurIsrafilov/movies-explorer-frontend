@@ -1,6 +1,5 @@
 import React from "react";
-
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import search_icon from "../../images/search_icon.svg";
 
@@ -13,7 +12,9 @@ import {
 } from "../../utils/Constants";
 
 function SearchForm(props) {
-  const { handleChange, values, setValues, errors } = Validation();
+  const { handleChange, values, setValues } = Validation();
+
+  const [isNotValid, setIsNotValid] = useState(false);
 
   const buttonTumblerClassName = `search-form__button-tumbler ${
     props.isShort && "search-form__button-tumbler_active"
@@ -34,7 +35,12 @@ function SearchForm(props) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    props.onSearchValue({ searchinput: values.searchinput });
+    if (!values.searchinput) {
+      setIsNotValid(true);
+    } else {
+      setIsNotValid(false);
+      props.onSearchValue({ searchinput: values.searchinput });
+    }
   }
 
   useEffect(() => {
@@ -56,6 +62,7 @@ function SearchForm(props) {
           className="search-form__container-serch"
           name={"searchForm"}
           onSubmit={handleSubmit}
+          noValidate
         >
           <div className="search-form__container-input">
             <div className="search-form__logo-loop" title="Лупа"></div>
@@ -71,7 +78,7 @@ function SearchForm(props) {
                 onChange={handleChange}
               />
               <span className="search-form__input-error searchinput-input-error">
-                {errors.searchinput}
+                {isNotValid ? "Нужно ввести ключевое слово" : ""}
               </span>
             </div>
           </div>

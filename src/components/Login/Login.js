@@ -1,11 +1,20 @@
 import React from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useState, useCallback } from "react";
 
 import logo from "../../images/logo.svg";
 import { Validation } from "../../utils/Validation";
 
 function Login(props) {
-  const { values, handleChange, errors, isValid, resetForm } = Validation();
+  const {
+    handleChange,
+    values,
+    setValues,
+    errors,
+    isValid,
+    // resetForm,
+  } = Validation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,6 +25,14 @@ function Login(props) {
     props.handleLogin(values);
     // resetForm({ email: "", password: "" });
   };
+
+  useEffect(() => {
+    setValues({
+      ...values,
+      email: values.email,
+      password: values.password,
+    });
+  }, []);
 
   return (
     <section className="login">

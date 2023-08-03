@@ -5,14 +5,20 @@ import logo from "../../images/logo.svg";
 import { Validation } from "../../utils/Validation";
 
 function Register(props) {
-  const { values, handleChange, errors, isValid, resetForm } = Validation();
+  const {
+    handleChange,
+    values,
+    errors,
+    isValid,
+    // resetForm,
+  } = Validation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (values.name || values.email || values.password) {
       props.handleRegister(values);
-      resetForm({ name: "", email: "", password: "" });
+      // resetForm({ name: "", email: "", password: "" });
     }
   };
 

@@ -95,7 +95,7 @@ function App() {
   // обработка общей ошибки
   const showError = (res) => {
     console.log(`Ошибка.....: ${res.status}, ${res.statusText}`);
-    navigate("/error");
+    navigate("/error", { replace: false });
     setError(res);
   };
 
