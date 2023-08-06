@@ -31,7 +31,7 @@ import beatfilmApi from "../../utils/MoviesApi.js";
 import mainApi from "../../utils/MainApi.js";
 
 import {
-  // BASIC_URL,
+  BASIC_URL,
   BASIC_HTTP_URL,
   BASIC_HTTPS_URL,
   BEATFILMSERVER_URL,
@@ -103,7 +103,7 @@ function App() {
 
   // состояние чекбокса короткометражки
   const isShort =
-    // window.location.href === `${BASIC_URL}/movies` ||
+    window.location.href === `${BASIC_URL}/movies` ||
     window.location.href === `${BASIC_HTTP_URL}/movies` ||
     window.location.href === `${BASIC_HTTPS_URL}/movies`
       ? JSON.parse(localStorage.getItem("isShortMovies"))
@@ -188,13 +188,21 @@ function App() {
 
   // отображение сохраненных фильмов роут /movie
   useEffect(() => {
-    if (localStorage.getItem("searchedMovies")) {
+    if (
+      JSON.parse(localStorage.getItem("searchValue")) ||
+      JSON.parse(localStorage.getItem("searchedMovies"))
+    ) {
+      const searchValue = JSON.parse(localStorage.getItem("searchValue"));
+      handleSearchValue(searchValue);
       const searchedMovies = JSON.parse(localStorage.getItem("searchedMovies"));
-      const searchValue = localStorage.getItem("searchValue");
+
       const movieNumberAdd = localStorage.getItem("movieNumberAdd");
+
       const searchedMoviesPack = searchedMovies.filter(
         (movie) =>
-          movie.nameRU.toLowerCase().includes(searchValue.toLowerCase()) &&
+          movie.nameRU
+            .toLowerCase()
+            .includes(searchValue.searchinput.toLowerCase()) &&
           movie.duration < (isShort ? SHORT_MOVIE : LONG_MOVIE)
       );
       const firstMoviesSetAdd = searchedMoviesPack.splice(0, movieNumberAdd);
@@ -219,7 +227,7 @@ function App() {
         .then(() => {
           const localStorageMovies = JSON.parse(localStorage.getItem("movies"));
           handleSearcheMovies(localStorageMovies, searchValue);
-          localStorage.setItem("searchValue", searchValue.searchinput);
+          localStorage.setItem("searchValue", JSON.stringify(searchValue));
           setPreloader(false);
         })
         .catch((err) => {
@@ -229,7 +237,7 @@ function App() {
         });
     } else {
       handleSearcheMovies(localStorageMovies, searchValue);
-      localStorage.setItem("searchValue", searchValue.searchinput);
+      localStorage.setItem("searchValue", JSON.stringify(searchValue));
     }
   }
 
@@ -237,13 +245,11 @@ function App() {
   function handleSearcheMovies(movies, searchValue) {
     setPreloaderError(false);
     setLoaderError(false);
-    const searchedMoviesPack = movies.filter(
-      (movie) =>
-        movie.nameRU
-          .toLowerCase()
-          .includes(searchValue.searchinput.toLowerCase()) &&
-        movie.duration < (isShort ? SHORT_MOVIE : LONG_MOVIE)
+
+    const searchedMoviesPack = movies.filter((movie) =>
+      movie.nameRU.toLowerCase().includes(searchValue.searchinput.toLowerCase())
     );
+
     if (searchedMoviesPack.length === 0) {
       setLoaderError(true);
     } else {
@@ -251,10 +257,16 @@ function App() {
         "searchedMovies",
         JSON.stringify(searchedMoviesPack)
       );
+      const searchedWithDurationMoviesPack = searchedMoviesPack.filter(
+        (movie) => movie.duration < (isShort ? SHORT_MOVIE : LONG_MOVIE)
+      );
       handleMovieNumberAdd();
-      const firstMoviesSetAdd = searchedMoviesPack.splice(0, movieNumberAdd);
+      const firstMoviesSetAdd = searchedWithDurationMoviesPack.splice(
+        0,
+        movieNumberAdd
+      );
 
-      setSearchedMovies(searchedMoviesPack);
+      setSearchedMovies(searchedWithDurationMoviesPack);
       setMoviesForAdd(firstMoviesSetAdd);
     }
   }
@@ -271,11 +283,20 @@ function App() {
 
   // отображение сохраненных фильмов роут /saved-movie
   useEffect(() => {
-    setSavedSearchedMovies(
-      savedMovies.filter(
-        (movie) => movie.duration < (isShort ? SHORT_MOVIE : LONG_MOVIE)
-      )
-    );
+    const savedSearchValue = localStorage.getItem("savedSearchValue");
+    if (savedSearchValue || isShort) {
+      setSavedSearchedMovies(
+        savedMovies.filter(
+          (movie) =>
+            movie.nameRU
+              .toLowerCase()
+              .includes(savedSearchValue ? savedSearchValue : "") &&
+            movie.duration < (isShort ? SHORT_MOVIE : LONG_MOVIE)
+        )
+      );
+    } else {
+      setSavedSearchedMovies(savedMovies);
+    }
   }, [savedMovies, isShortSavedMovies]);
 
   // обработчик запроса на сортировку сохраненных фильмов роут /saved-movie

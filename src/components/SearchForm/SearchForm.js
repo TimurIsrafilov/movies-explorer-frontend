@@ -6,7 +6,7 @@ import search_icon from "../../images/search_icon.svg";
 import { Validation } from "../../utils/Validation";
 
 import {
-  // BASIC_URL,
+  BASIC_URL,
   BASIC_HTTP_URL,
   BASIC_HTTPS_URL,
   VALID_ERR_SEARCH,
@@ -45,14 +45,18 @@ function SearchForm(props) {
   }
 
   useEffect(() => {
+    const searchValue = JSON.parse(localStorage.getItem("searchValue"));
+    const savedSearchValue = localStorage.getItem("savedSearchValue");
     setValues({
       ...values,
       searchinput:
-        // window.location.href === `${BASIC_URL}/movies` ||
+        window.location.href === `${BASIC_URL}/movies` ||
         window.location.href === `${BASIC_HTTP_URL}/movies` ||
         window.location.href === `${BASIC_HTTPS_URL}/movies`
-          ? localStorage.getItem("searchValue")
-          : localStorage.getItem("savedSearchValue"),
+          ? searchValue
+            ? searchValue.searchinput
+            : ""
+          : savedSearchValue,
     });
   }, []);
 

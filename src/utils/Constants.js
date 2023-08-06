@@ -1,6 +1,6 @@
+// const BASIC_URL = "http://localhost:3000";
 const BASIC_HTTP_URL = "http://movies-explorer-itf.nomoredomains.monster";
 const BASIC_HTTPS_URL = "https://movies-explorer-itf.nomoredomains.monster";
-// const BASIC_URL = "http://localhost:3000";
 const BEATFILMSERVER_URL = "https://api.nomoreparties.co";
 
 const SHORT_MOVIE = 40;
@@ -18,7 +18,7 @@ const MOBILE_FIRST_MOVIES = 5;
 const DESKTOP_NEXT_MOVIES_4 = 4;
 const DESKTOP_NEXT_MOVIES_3 = 3;
 const TABLET_NEXT_MOVIES = 2;
-const MOBILE_NEXT_MOVIES = 5;
+const MOBILE_NEXT_MOVIES = 2;
 
 const VALID_ERR_NAME = "Нужно ввести имя";
 const VALID_ERR_EMAIL = "Невалидный email";
@@ -27,6 +27,9 @@ const VALID_ERR_SEARCH = "Нужно ввести ключевое слово";
 
 const ERR_PAGE_NOT_FOUND = "страница не найдена";
 const ERR_PAGE_404 = "404";
+
+const REG_EX_EMAIL_CHECK = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+const REG_EX_NAME_CHECK = /^[а-яА-ЯёЁa-zA-Z0-9\-\s]+$/i;
 
 module.exports = {
   // BASIC_URL,
@@ -58,4 +61,7 @@ module.exports = {
 
   ERR_PAGE_NOT_FOUND,
   ERR_PAGE_404,
+
+  REG_EX_EMAIL_CHECK,
+  REG_EX_NAME_CHECK,
 };

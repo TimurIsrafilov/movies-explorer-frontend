@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
 import {
   VALID_ERR_NAME,
   VALID_ERR_EMAIL,
   VALID_ERR_PASS,
+  REG_EX_EMAIL_CHECK,
+  REG_EX_NAME_CHECK,
 } from "./Constants";
 
 export function Validation() {
@@ -12,18 +14,18 @@ export function Validation() {
   const [isValid, setIsValid] = useState(false);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const target = e.target;
+    const name = target.name;
+    const value = target.value;
 
     setValues({ ...values, [name]: value });
 
     if (name === "name") {
-      const validName = value.match(/^[а-яА-ЯёЁa-zA-Z0-9\-\s]+$/i);
+      const validName = value.match(REG_EX_NAME_CHECK);
       setErrors({ ...errors, [name]: validName ? "" : VALID_ERR_NAME });
     }
     if (name === "email") {
-      const validEmail = value.match(
-        /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
-      );
+      const validEmail = value.match(REG_EX_EMAIL_CHECK);
       setErrors({ ...errors, [name]: validEmail ? "" : VALID_ERR_EMAIL });
     }
     if (name === "password") {
@@ -33,25 +35,27 @@ export function Validation() {
         [name]: validPassword ? "" : VALID_ERR_PASS,
       });
     }
-    // if (name === "searchinput") {
-    //   const validSearch = value.length >= 1;
-    //   setErrors({
-    //     ...errors,
-    //     [name]: validSearch ? "" : " Нужно ввести ключевое слово",
-    //   });
-    // }
 
-    setIsValid(e.target.closest("form").checkValidity());
+    const isValid = e.target.closest("form").checkValidity();
+    let isEmailValid = true;
+    const emailInput = e.target
+      .closest("form")
+      .querySelector('input[name="email"]');
+    if (emailInput) {
+      isEmailValid = REG_EX_EMAIL_CHECK.test(emailInput.value);
+    }
+
+    setIsValid(isValid && isEmailValid);
   };
 
-  // const resetForm = useCallback(
-  //   (newValues = {}, newErrors = {}, newIsValid = false) => {
-  //     setValues(newValues);
-  //     setErrors(newErrors);
-  //     setIsValid(newIsValid);
-  //   },
-  //   [setValues, setErrors, setIsValid]
-  // );
+  const resetForm = useCallback(
+    (newValues = {}, newErrors = {}, newIsValid = false) => {
+      setValues(newValues);
+      setErrors(newErrors);
+      setIsValid(newIsValid);
+    },
+    [setValues, setErrors, setIsValid]
+  );
 
   return {
     handleChange,
@@ -61,6 +65,6 @@ export function Validation() {
     setErrors,
     isValid,
     setIsValid,
-    // resetForm,
+    resetForm,
   };
 }
