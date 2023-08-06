@@ -12,7 +12,7 @@ https://github.com/TimurIsrafilov/movies-explorer-frontend
 
 ## Ссылки на проект
 
-IP-адрес: 51.250.71.202
+Pull request: https://github.com/TimurIsrafilov/movies-explorer-frontend/pull/2
 
 Frontend: https://movies-explorer-itf.nomoredomains.monster/
 

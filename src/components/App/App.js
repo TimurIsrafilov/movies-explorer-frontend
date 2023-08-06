@@ -31,7 +31,7 @@ import beatfilmApi from "../../utils/MoviesApi.js";
 import mainApi from "../../utils/MainApi.js";
 
 import {
-  BASIC_URL,
+  // BASIC_URL,
   BASIC_HTTP_URL,
   BASIC_HTTPS_URL,
   BEATFILMSERVER_URL,
@@ -103,7 +103,7 @@ function App() {
 
   // состояние чекбокса короткометражки
   const isShort =
-    window.location.href === `${BASIC_URL}/movies` ||
+    // window.location.href === `${BASIC_URL}/movies` ||
     window.location.href === `${BASIC_HTTP_URL}/movies` ||
     window.location.href === `${BASIC_HTTPS_URL}/movies`
       ? JSON.parse(localStorage.getItem("isShortMovies"))

@@ -5,7 +5,7 @@ import { Link, NavLink } from "react-router-dom";
 import logo from "../../images/logo.svg";
 
 import {
-  BASIC_URL,
+  // BASIC_URL,
   BASIC_HTTP_URL,
   BASIC_HTTPS_URL,
 } from "../../utils/Constants";
@@ -81,10 +81,10 @@ function Navigation(props) {
             {props.loggedIn ? (
               <button
                 className={`navigation__menu-icon ${
-                  window.location.href === `${BASIC_URL}/` ||
-                  window.location.href === `${BASIC_URL}/#aboutproject` ||
-                  window.location.href === `${BASIC_URL}/#techs` ||
-                  window.location.href === `${BASIC_URL}/#aboutme` ||
+                  // window.location.href === `${BASIC_URL}/` ||
+                  // window.location.href === `${BASIC_URL}/#aboutproject` ||
+                  // window.location.href === `${BASIC_URL}/#techs` ||
+                  // window.location.href === `${BASIC_URL}/#aboutme` ||
                   window.location.href === `${BASIC_HTTP_URL}/` ||
                   window.location.href === `${BASIC_HTTPS_URL}/` ||
                   window.location.href === `${BASIC_HTTP_URL}/#aboutproject` ||
