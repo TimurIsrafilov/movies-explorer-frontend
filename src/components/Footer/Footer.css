@@ -1,0 +1,112 @@
+.footer {
+    margin: 0;
+    border: 0;
+}
+
+.footer__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 70px 20px 70px;
+}
+
+@media screen and (max-width: 766px) {
+    .footer__container {
+        margin: 0 10px 20px 10px;
+    }
+}
+
+.footer__title {
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    color: rgba(139, 139, 139, 1);
+    margin: 0;
+    padding: 80px 0 0 0;
+    align-self: center;
+    height: 35px;
+}
+
+@media screen and (max-width: 766px) {
+    .footer__title {
+        font-size: 12px;
+        padding: 130px 0 0 0;
+    }
+}
+
+@media screen and (max-width: 468px) {
+    .footer__title {
+        padding: 110px 0 0 0;
+    }
+}
+
+.footer__copyright-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 18px 0 0 0;
+    border-top: 1px solid rgba(66, 66, 66, 1);
+}
+
+@media screen and (max-width: 766px) {
+    .footer__copyright-container {
+        flex-direction: column-reverse;
+        padding: 14px 0 0 0;
+    }
+}
+
+.footer__link-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 766px) {
+    .footer__link-container {
+        flex-direction: column;
+    }
+}
+
+.footer__copyright {
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    color: rgba(255, 255, 255, 1);
+    margin: 0;
+    padding: 0;
+    align-self: center;
+    text-decoration: none;
+    opacity: 1;
+    transition: 0.5s;
+}
+
+.footer__copyright:hover {
+    opacity: 0.6;
+    transition: 0.5s;
+}
+
+@media screen and (max-width: 766px) {
+    .footer__copyright {
+        margin: 20px 0 0 0;
+    }
+}
+
+@media screen and (max-width: 468px) {
+    .footer__copyright {
+        font-size: 12px;
+    }
+}
+
+.footer__copyright:last-child {
+    margin: 0 0 0 17px;
+}
+
+@media screen and (max-width: 766px) {
+    .footer__copyright:last-child {
+        margin: 10px 0 0 0;
+
+    }
+}

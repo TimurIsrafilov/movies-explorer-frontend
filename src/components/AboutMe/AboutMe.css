@@ -1,0 +1,221 @@
+.about-me {
+    margin: 0;
+    padding: 0;
+}
+
+.about-me__container {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-me__title-container {
+    width: 1140px;
+    border-bottom: 1px solid rgba(218, 218, 218, 1);
+    margin: 110px 0 23px 0;
+    padding: 0;
+}
+
+@media screen and (max-width: 1278px) {
+    .about-me__title-container {
+        width: 668px;
+        margin: 120px 0 23px 0;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .about-me__title-container {
+        margin: 90px 0 23px 0;
+    }
+}
+
+@media screen and (max-width: 766px) {
+    .about-me__title-container {
+        width: 284px;
+        margin: 150px 0 0 0;
+    }
+}
+
+@media screen and (max-width: 468px) {
+    .about-me__title-container {
+        margin: 106px 0 0 0;
+    }
+}
+
+.about-me__title {
+    margin: 0 0 25px 0;
+    padding: 0;
+    align-self: flex-start;
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    color: rgba(255, 255, 255, 1);
+}
+
+@media screen and (max-width: 766px) {
+    .about-me__title {
+        font-size: 18px;
+    }
+}
+
+.about-me__description-container {
+    margin: 66px 0 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 1140px;
+}
+
+@media screen and (max-width: 1278px) {
+    .about-me__description-container {
+        width: 668px;
+    }
+}
+
+@media screen and (max-width: 766px) {
+    .about-me__description-container {
+
+        flex-direction: column-reverse;
+        width: 284px;
+    }
+}
+
+@media screen and (max-width: 468px) {
+    .about-me__description-container {
+        margin: 56px 0 0 0;
+    }
+}
+
+.about-me__profile-container {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+@media screen and (max-width: 766px) {
+    .about-me__profile-container {
+        margin: 30px 0 0 0;
+    }
+}
+
+.about-me__description-name {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 58px;
+    color: rgba(255, 255, 255, 1);
+}
+
+@media screen and (max-width: 1278px) {
+    .about-me__description-name {
+        font-size: 40px;
+    }
+}
+
+@media screen and (max-width: 1278px) {
+    .about-me__description-name {
+        font-size: 30px;
+    }
+}
+
+.about-me__description-profession {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+    color: rgba(255, 255, 255, 1);
+}
+
+@media screen and (max-width: 1278px) {
+    .about-me__description-profession {
+        font-size: 12px;
+    }
+}
+
+.about-me__description-text {
+    margin: 28px 0 108px 0;
+    padding: 0;
+    align-self: flex-start;
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+    color: rgba(255, 255, 255, 1);
+    width: 600px;
+}
+
+@media screen and (max-width: 1278px) {
+    .about-me__description-text {
+        font-size: 12px;
+        line-height: 18px;
+        width: 364px;
+    }
+}
+
+@media screen and (max-width: 766px) {
+    .about-me__description-text {
+        margin: 28px 0 28px 0;
+        font-size: 11px;
+        line-height: 16px;
+        width: 290px;
+    }
+}
+
+@media screen and (max-width: 468px) {
+    .about-me__description-text {
+        margin: 14px 0 28px 0;
+    }
+}
+
+.about-me__description-link {
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 1);
+    text-decoration: none;
+    opacity: 1;
+    transition: 0.5s;
+}
+
+.about-me__description-link:hover {
+    opacity: 0.6;
+    transition: 0.5s;
+}
+
+.about-me__description-photo {
+    margin: 0;
+    padding: 0;
+    height: 327px;
+    width: 270px;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 1278px) {
+    .about-me__description-photo {
+        height: 307px;
+        width: 255px;
+    }
+}
+
+@media screen and (max-width: 766px) {
+    .about-me__description-photo {
+        height: 352px;
+        width: 292px;
+        align-self: center;
+    }
+}

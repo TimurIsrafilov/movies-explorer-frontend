@@ -1,2 +1,10 @@
-# movies-explorer-frontend
-diploma frontend
+# **Дипломная Работа**
+
+### Описание:
+Интерактивный проект по поиску фильмов.
+
+### Особенности:
+- Реализована верстка на JSX
+
+### Ссылка на макет Figma:
+https://disk.yandex.ru/d/gUX-RZiGhb9MzQ
