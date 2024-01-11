@@ -1,10 +1,27 @@
 import React from "react";
-
 import { Link } from "react-router-dom";
 
 import logo from "../../images/logo.svg";
+import { Validation } from "../../utils/Validation";
 
-function Register() {
+function Register(props) {
+  const {
+    handleChange,
+    values,
+    errors,
+    isValid,
+    // resetForm,
+  } = Validation();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (values.name || values.email || values.password) {
+      props.handleRegister(values);
+      // resetForm({ name: "", email: "", password: "" });
+    }
+  };
+
   return (
     <section className="register">
       <div className="register__header-container">
@@ -15,7 +32,11 @@ function Register() {
         <h3 className="register__title">Добро пожаловать!</h3>
       </div>
 
-      <form className="register__form" name={"registerForm"}>
+      <form
+        className="register__form"
+        name={"registerForm"}
+        onSubmit={handleSubmit}
+      >
         <div className="register__inputs-container">
           <span className="register__field-name">Имя</span>
           <input
@@ -25,9 +46,11 @@ function Register() {
             name="name"
             required
             className="register__input register__input_type_name"
+            value={values.name || ""}
+            onChange={handleChange}
           />
           <span className="register__input-error name-input-error">
-            Что-то пошло не так...
+            {errors.name}
           </span>
           <span className="register__field-name">E-mail</span>
           <input
@@ -37,9 +60,11 @@ function Register() {
             name="email"
             required
             className="register__input register__input_type_email"
+            value={values.email || ""}
+            onChange={handleChange}
           />
           <span className="register__input-error email-input-error">
-            Что-то пошло не так...
+            {errors.email}
           </span>
           <span className="register__field-name">Пароль</span>
           <input
@@ -49,15 +74,20 @@ function Register() {
             name="password"
             required
             className="register__input register__input_type_password"
+            value={values.password || ""}
+            onChange={handleChange}
           />
           <span className="register__input-error password-input-error">
-            Что-то пошло не так...
+            {errors.password}
           </span>
         </div>
         <button
           type="submit"
-          className="register__submit-button"
+          className={`register__submit-button ${
+            isValid ? "" : "register__submit-button_disabled"
+          }`}
           aria-label="Да"
+          disabled={`${isValid ? "" : "disabled"}`}
         >
           Зарегистрироваться
         </button>

@@ -139,6 +139,7 @@
     font-size: 10px;
     color: rgba(238, 52, 101, 1);
     margin: 0;
+    height: 10px;
 }
 
 .name-input-error {}
@@ -174,6 +175,10 @@
 .login__submit-button:hover {
     opacity: 0.6;
     transition: 0.5s;
+}
+
+.login__submit-button_disabled {
+    background-color: rgba(47, 47, 47, 1);
 }
 
 .login__note-container {

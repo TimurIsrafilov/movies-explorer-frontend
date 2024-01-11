@@ -4,7 +4,16 @@
 Интерактивный проект по поиску фильмов.
 
 ### Особенности:
-- Реализована верстка на JSX
+- Реализован функционал фронта, размещается на созданной ВМ
 
-### Ссылка на макет Figma:
-https://disk.yandex.ru/d/gUX-RZiGhb9MzQ
+### Ссылка на репо:
+https://github.com/TimurIsrafilov/movies-explorer-frontend
+
+
+## Ссылки на проект
+
+Pull request: https://github.com/TimurIsrafilov/movies-explorer-frontend/pull/2
+
+Frontend: https://movies-explorer-itf.nomoredomains.monster/
+
+Backend: https://api.movies-explorer-itf.nomoredomains.monster/

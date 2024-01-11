@@ -1,33 +1,49 @@
 import React from "react";
 
 import MoviesCard from "../MoviesCard/MoviesCard.js";
-import PopupForm from "../PopupForm/PopupForm.js";
 
-function MoviesCardList() {
+function MoviesCardList(props) {
   return (
     <section className="moviescardlist">
       <div className="moviescardlist__container">
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
+        {props.moviesForAdd
+          ? props.moviesForAdd.map((movie) => (
+              <MoviesCard
+                savedMovies={props.savedMovies}
+                movie={movie}
+                nameRU={movie.nameRU}
+                duration={movie.duration}
+                imageurl={movie.image.url}
+                trailerLink={movie.trailerLink}
+                id={movie.id}
+                key={movie.id}
+                onMovieAdd={props.onMovieAdd}
+                onSavedMovieDelete={props.onSavedMovieDelete}
+              />
+            ))
+          : ""}
       </div>
-      <div className="moviescardlist__add-container">
-        <button className="moviescardlist__add">Ещё</button>
+
+      <div
+        className={`${
+          props.searchedMovies.length !== 0
+            ? "moviescardlist__add-container"
+            : ""
+        }`}
+      >
+        {props.searchedMovies.length !== 0 ? (
+          <button
+            type="button"
+            className="moviescardlist__add"
+            aria-label="Ещё"
+            onClick={props.onClick}
+          >
+            Ещё
+          </button>
+        ) : (
+          ""
+        )}
       </div>
-      {/* <PopupForm /> */}
     </section>
   );
 }

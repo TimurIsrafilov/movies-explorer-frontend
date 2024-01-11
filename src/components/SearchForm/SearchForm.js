@@ -1,23 +1,91 @@
 import React from "react";
+import { useEffect, useState } from "react";
 
-import tumbler_icon from "../../images/tumbler_icon.svg";
 import search_icon from "../../images/search_icon.svg";
 
-function SearchForm() {
+import { Validation } from "../../utils/Validation";
+
+import {
+  // BASIC_URL,
+  BASIC_HTTP_URL,
+  BASIC_HTTPS_URL,
+  VALID_ERR_SEARCH,
+} from "../../utils/Constants";
+
+function SearchForm(props) {
+  const { handleChange, values, setValues } = Validation();
+
+  const [isNotValid, setIsNotValid] = useState(false);
+
+  const buttonTumblerClassName = `search-form__button-tumbler ${
+    props.isShort && "search-form__button-tumbler_active"
+  }`;
+
+  const searchFormButtonClassName = `search-form__button ${
+    props.isShort && "search-form__button_active"
+  }`;
+
+  const handleSetShortMovies = () => {
+    props.onMoviesShort();
+  };
+
+  const handleSetAllMovies = () => {
+    props.onMoviesAll();
+  };
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    if (!values.searchinput) {
+      setIsNotValid(true);
+    } else {
+      setIsNotValid(false);
+      props.onSearchValue({ searchinput: values.searchinput });
+    }
+  }
+
+  useEffect(() => {
+    const searchValue = JSON.parse(localStorage.getItem("searchValue"));
+    const savedSearchValue = localStorage.getItem("savedSearchValue");
+    setValues({
+      ...values,
+      searchinput:
+        // window.location.href === `${BASIC_URL}/movies` ||
+        window.location.href === `${BASIC_HTTP_URL}/movies` ||
+        window.location.href === `${BASIC_HTTPS_URL}/movies`
+          ? searchValue
+            ? searchValue.searchinput
+            : ""
+          : savedSearchValue,
+    });
+  }, []);
+
   return (
     <section className="search-form">
       <div className="search-form__container">
-        <form className="search-form__container-serch">
+        <form
+          className="search-form__container-serch"
+          name={"searchForm"}
+          onSubmit={handleSubmit}
+          noValidate
+        >
           <div className="search-form__container-input">
             <div className="search-form__logo-loop" title="Лупа"></div>
-            <input
-              id="search-film-input"
-              type="text"
-              placeholder="Фильм"
-              name="search-film"
-              required
-              className="search-form__input"
-            />
+            <div className="search-form__input-container">
+              <input
+                id="search-input"
+                type="text"
+                placeholder="Фильм"
+                name="searchinput"
+                required
+                className="search-form__input"
+                value={values.searchinput || ""}
+                onChange={handleChange}
+              />
+              <span className="search-form__input-error searchinput-input-error">
+                {isNotValid ? VALID_ERR_SEARCH : ""}
+              </span>
+            </div>
           </div>
           <button className="search-form__search-button">
             <img
@@ -27,12 +95,18 @@ function SearchForm() {
             />
           </button>
         </form>
+
         <div className="search-form__container-icon">
-          <img
-            className="search-form__tumbler"
-            alt="Поиск"
-            src={tumbler_icon}
-          />
+          <div className={searchFormButtonClassName}>
+            <button
+              type="button"
+              className={buttonTumblerClassName}
+              aria-label="оставить короткометражки"
+              onClick={
+                props.isShort ? handleSetAllMovies : handleSetShortMovies
+              }
+            ></button>
+          </div>
           <span className="search-form__logo-span">Короткометражки</span>
         </div>
       </div>

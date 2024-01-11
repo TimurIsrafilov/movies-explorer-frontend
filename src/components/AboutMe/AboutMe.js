@@ -2,9 +2,9 @@ import React from "react";
 
 import profile_photo from "../../images/profile_photo.jpg";
 
-function AboutMe() {
+function AboutMe(props) {
   return (
-    <section className="about-me">
+    <section id={props.aboutMeId} className="about-me">
       <div className="about-me__container">
         <div className="about-me__title-container">
           <h2 className="about-me__title">Студент</h2>

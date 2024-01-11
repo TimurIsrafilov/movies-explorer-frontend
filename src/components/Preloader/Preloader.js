@@ -1,14 +1,20 @@
 import React from "react";
 import "./Preloader.css";
 
-const Preloader = () => {
+function Preloader(props) {
   return (
     <section className="preloader">
-      <div className="preloader__container">
-        <span className="preloader__round"></span>
+      <div className={`${props.preloader ? "preloader__container" : ""}`}>
+        <span className={`${props.preloader ? "preloader__round" : ""}`}></span>
+        <span className={`${props.preloaderError ? "preloader__error" : ""}`}>
+          {`${props.preloaderError ? "Загрузка не удалась" : ""}`}
+        </span>
+        <span className={`${props.loaderError ? "preloader__error" : ""}`}>
+          {`${props.loaderError ? "Ничего не удалась найти" : ""}`}
+        </span>
       </div>
     </section>
   );
-};
+}
 
 export default Preloader;

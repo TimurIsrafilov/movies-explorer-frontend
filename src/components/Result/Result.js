@@ -1,16 +1,19 @@
 import React from "react";
 
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function Result() {
+function Result(props) {
+  const navigate = useNavigate();
+  const goBack = () => navigate(-1);
+
   return (
     <section className="result">
       <div className="result__container">
-        <h2 className="result__error-number">404</h2>
-        <p className="result__error-description">Страница не найдена</p>
-        <Link to="/" className="result__back">
+        <h2 className="result__error-number">{props.error.status}</h2>
+        <p className="result__error-description">{props.error.statusText}</p>
+        <button type="button" className="result__back" onClick={goBack}>
           Назад
-        </Link>
+        </button>
       </div>
     </section>
   );

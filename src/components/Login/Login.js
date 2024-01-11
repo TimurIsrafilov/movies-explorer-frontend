@@ -1,10 +1,28 @@
 import React from "react";
-
 import { Link } from "react-router-dom";
 
 import logo from "../../images/logo.svg";
+import { Validation } from "../../utils/Validation";
 
-function Login() {
+function Login(props) {
+  const {
+    handleChange,
+    values,
+    errors,
+    isValid,
+    // resetForm,
+  } = Validation();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!values.email || !values.password) {
+      return;
+    }
+    props.handleLogin(values);
+    // resetForm({ email: "", password: "" });
+  };
+
   return (
     <section className="login">
       <div className="login__header-container">
@@ -14,7 +32,7 @@ function Login() {
         <h3 className="login__title">Рады видеть!</h3>
       </div>
 
-      <form className="login__form" name={"loginForm"}>
+      <form className="login__form" name={"loginForm"} onSubmit={handleSubmit}>
         <div className="login__inputs-container">
           <span className="login__field-name">E-mail</span>
           <input
@@ -24,9 +42,11 @@ function Login() {
             name="email"
             required
             className="login__input login__input_type_email"
+            value={values.email || ""}
+            onChange={handleChange}
           />
           <span className="login__input-error email-input-error">
-            Что-то пошло не так...
+            {errors.email}
           </span>
           <span className="login__field-name">Пароль</span>
           <input
@@ -36,15 +56,20 @@ function Login() {
             name="password"
             required
             className="login__input login__input_type_password"
+            value={values.password || ""}
+            onChange={handleChange}
           />
           <span className="login__input-error password-input-error">
-            Что-то пошло не так...
+            {errors.password}
           </span>
         </div>
         <button
           type="submit"
-          className="login__submit-button"
+          className={`login__submit-button ${
+            isValid ? "" : "login__submit-button_disabled"
+          }`}
           aria-label="Да"
+          disabled={`${isValid ? "" : "disabled"}`}
         >
           Войти
         </button>
