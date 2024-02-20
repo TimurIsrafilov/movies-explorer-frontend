@@ -13,4 +13,5 @@
 ### Ссылка на макет Figma:
 https://disk.yandex.ru/d/m4NdtCxdkxVwRw
 
-### Технологии: CSS SCSS html JS React
+### Технологии:
+HTML CSS JS React
